@@ -16,6 +16,7 @@ export default [
     component: '../layouts/BasicLayout',
     Routes: ['src/pages/Authorized'],
     routes: [
+      // todo
       // dashboard
       { path: '/', redirect: '/dashboard/analysis' },
       {
