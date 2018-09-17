@@ -7,16 +7,14 @@
   float: left;
   width: 280px;
   height: 100%;
-  border-right: 1px solid #e0e0e0;
 }
 .leftTop {
   height: 100px;
-  background: #E8EAEE;
-  border-bottom: 1px solid #e0e0e0;
+  background: #e8e8e8;
 }
 .leftBottom {
   height: calc(100% - 100px);
-  background: #E5E6E8;
+  background: #f0f0f0;
   overflow: auto;
 }
 .right {
@@ -27,10 +25,68 @@
 .rightTop {
   height: calc(100% - 200px);
   overflow: auto;
-  background: #F5F5F5;
-  border-bottom: 1px solid #e0e0e0;
+  background: #fafafa;
+  border-bottom: 1px solid #f0f0f0;
 }
 .rightBottom {
   height: 200px;
   background: #fff;
+}
+:global .chatterList-chatters:hover {
+  background: #e8e8e8
+}
+:global .chatterList-active {
+  background: #dfdfdf !important;
+}
+.leftMessage {
+  margin: 10px 0;
+  display: flex;
+  align-items: flex-start;
+  justify-content: flex-start;
+}
+.rightMessage {
+  margin: 10px 0;
+  display: flex;
+  align-items: flex-start;
+  justify-content: flex-end;
+}
+.messageItem {
+  width: 40%;
+  position: relative;
+  border: 1px solid #eee;
+  border-radius: 4px;
+  box-shadow: 2px 2px 2px #eee;
+  line-height: 18px;
+  background: #fff;
+  padding: 7px;
+}
+.leftMessageItem {
+  composes: messageItem;
+  margin-left: 12px;
+}
+.rightMessageItem {
+  composes: messageItem;
+  margin-right: 12px;
+}
+.arrow{
+  width: 10px;
+  height: 10px;
+  background: #fff;
+  position: absolute;
+  content: '';
+  top: 10px;
+  transform: rotate(45deg);
+  -webkit-transform: rotate(45deg);
+}
+.leftArrow {
+  composes: arrow;
+  left: -6px;
+  border-left: 1px solid #eee;
+  border-bottom: 1px solid #eee;
+}
+.rightArrow {
+  composes: arrow;
+  right: -6px;
+  border-right: 1px solid #eee;
+  border-top: 1px solid #eee;
 }

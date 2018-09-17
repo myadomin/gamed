@@ -74,12 +74,7 @@ html, body {
 }
 
 /* base.css也是css module的，而css module只对class id生效，也就是下面的才有css module hash，上面的元素选择器无效，是全局的 */
-.pull-left {
-	float: left
-}
-.pull-right {
-	float: right
-}
-button:disabled {
-	cursor: not-allowed
+/* ant-d全局样式改造 */
+:global .ant-list-item-meta-title {
+	margin-bottom: 0px
 }

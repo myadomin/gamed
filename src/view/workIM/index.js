@@ -1,7 +1,9 @@
 import React, { Component } from 'react'
 import { Row, Col } from 'antd'
 import s from './index.css'
-import AddPlayer from './AddPlayer'
+import AddChatter from './AddChatter'
+import ChatterList from './ChatterList'
+import MessageList from './MessageList'
 
 export default class workIM extends Component {
   constructor (props, context) {
@@ -15,19 +17,17 @@ export default class workIM extends Component {
       <div className={s.wrap}>
         <div className={s.left}>
           <div className={s.leftTop}>
-            <AddPlayer />
+            <AddChatter />
           </div>
           <div className={s.leftBottom}>
             <div className={s.leftBottomWrap}>
-              <p style={{ height: '1000px' }}>player</p>
+              <ChatterList />
             </div>
           </div>
         </div>
         <div className={s.right}>
           <div className={s.rightTop}>
-            <div className={s.rightTopWrap}>
-              <p style={{ height: '1000px' }}>chats</p>
-            </div>
+            <MessageList />
           </div>
           <div className={s.rightBottom}>
             rightBottom
