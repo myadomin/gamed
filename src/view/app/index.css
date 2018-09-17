@@ -1,0 +1,29 @@
+.logo {
+  -webkit-transition: all .3s;
+  background: #002140;
+  height: 64px;
+  line-height: 64px;
+  overflow: hidden;
+  position: relative;
+  transition: all .3s;
+}
+.h1 {
+  color: #fff;
+  display: inline-block;
+  font-family: Myriad Pro,Helvetica Neue,Arial,Helvetica,sans-serif;
+  font-size: 20px;
+  font-weight: 600;
+  vertical-align: middle;
+}
+.logoSvg {
+  display: inline-block;
+  height: 32px;
+  vertical-align: middle;
+  margin: 0 10px
+}
+:global(.avatar-dropdown-link:hover) {
+  background: #f8f8f8
+}
+:global(.message-badge:hover) {
+  background: #f8f8f8
+}
