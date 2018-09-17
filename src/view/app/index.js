@@ -3,7 +3,7 @@ import { Layout, Menu, Icon } from 'antd'
 import { Route, Link, withRouter } from 'react-router-dom'
 import s from './index.css'
 import GlobalHeader from './GlobalHeader'
-import WorkTable from '@src/view/workTable'
+import WorkIM from '@src/view/workIM'
 import Bill from '@src/view/bill'
 
 class App extends Component {
@@ -21,7 +21,7 @@ class App extends Component {
     // withRouter(App)以后 this.props就有location等路由相关信息了
     // 每次刷新 切换导航 重新输入url等都会进入这里 重新算出current给到selectedKeys
     // this.props.history.push(a) 动态跳转
-    const current = this.props.location.pathname.replace(/\//, '') || 'workTable'
+    const current = this.props.location.pathname.replace(/\//, '') || 'workIM'
     console.log(current)
     return (
       <Layout style={{ height: '100vh' }}>
@@ -38,8 +38,8 @@ class App extends Component {
           <Menu theme="dark" mode="inline"
             selectedKeys={[current]}
           >
-            <Menu.Item key="workTable">
-              <Link to="/workTable" replace>
+            <Menu.Item key="workIM">
+              <Link to="/workIM" replace>
                 <Icon type="desktop"/>
                 <span className="nav-text">工作台</span>
               </Link>
@@ -58,8 +58,8 @@ class App extends Component {
           </Header>
           <Content style={{ margin: '24px 16px 0' }}>
             <div style={{ padding: 24, background: '#fff', minHeight: 360 }}>
-              <Route exact path="/" component={WorkTable} />
-              <Route path="/workTable" component={WorkTable} />
+              <Route exact path="/" component={WorkIM} />
+              <Route path="/workIM" component={WorkIM} />
               <Route path="/bill" component={Bill} />
             </div>
           </Content>

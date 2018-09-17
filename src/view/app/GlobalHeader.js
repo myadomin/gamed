@@ -40,17 +40,6 @@ const GlobalHeader = () => {
           }} />
         </div>
       </Dropdown>
-      <span className="message-badge" style={{
-        display: 'block',
-        float: 'right',
-        height: '100%',
-        cursor: 'pointer',
-        padding: '0px 20px'
-      }}>
-        <Badge count={21}>
-          <Icon type="message" theme="outlined" style={{ color: '#1890ff', fontSize: '20px', margin: '5px' }} />
-        </Badge>
-      </span>
     </div>
   )
 }
