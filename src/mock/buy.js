@@ -1,4 +1,4 @@
-import URL from '@src/api/urls'
+import URL from '@/api/urls'
 
 export default [
   {

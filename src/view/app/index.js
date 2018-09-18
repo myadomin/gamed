@@ -3,8 +3,8 @@ import { Layout, Menu, Icon } from 'antd'
 import { Route, Link, withRouter } from 'react-router-dom'
 import s from './index.css'
 import GlobalHeader from './GlobalHeader'
-import WorkIM from '@src/view/workIM'
-import Bill from '@src/view/bill'
+import WorkIM from '@/view/workIM'
+import Bill from '@/view/bill'
 
 class App extends Component {
   constructor (props, context) {
@@ -17,7 +17,7 @@ class App extends Component {
   render () {
     const { Header, Content, Footer, Sider } = Layout
     // img src 图片都用require, npm build才能正确打包图片
-    const imgUrl = require('@src/assets/logo.svg')
+    const imgUrl = require('@/assets/logo.svg')
     // withRouter(App)以后 this.props就有location等路由相关信息了
     // 每次刷新 切换导航 重新输入url等都会进入这里 重新算出current给到selectedKeys
     // this.props.history.push(a) 动态跳转

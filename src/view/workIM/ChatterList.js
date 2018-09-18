@@ -65,7 +65,7 @@ export default class ChatterList extends Component {
         title: '玩家4'
       }
     ]
-    const imgUrl = require('@src/assets/11.jpg')
+    const imgUrl = require('@/assets/11.jpg')
     const { currentId } = this.state
     return (
       <List

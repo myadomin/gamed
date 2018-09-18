@@ -1,4 +1,4 @@
-import shop from '@src/view/shopcart/api/shop'
+import shop from '@/view/shopcart/api/shop'
 import * as types from '../constants/ActionTypes'
 
 const receiveProducts = products => ({
