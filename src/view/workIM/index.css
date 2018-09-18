@@ -89,11 +89,31 @@
 .rightArrow {
   composes: arrow;
   right: -6px;
-  border-right: 1px solid #eee;
-  border-top: 1px solid #eee;
+  border-right: 1px solid transparent;
+  border-top: 1px solid transparent;
   background: RGB(158,234,106);
 }
 .timestamp {
   font-size: 12px;
   opacity: 0.5;
+}
+.leftDeliverReceiptItem {
+  composes: leftTextItem;
+  background: #FA9E3B;
+}
+.rightDeliverReceiptItem {
+  composes: rightTextItem;
+  background: #FA9E3B;
+}
+.leftDeliverReceiptArrow {
+  composes: leftArrow;
+  background: #FA9E3B;
+  border-left: 1px solid transparent;
+  border-bottom: 1px solid transparent;
+}
+.rightDeliverReceiptArrow {
+  composes: rightArrow;
+  background: #FA9E3B;
+  border-left: 1px solid transparent;
+  border-bottom: 1px solid transparent;
 }

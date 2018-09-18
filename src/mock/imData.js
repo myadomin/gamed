@@ -1,6 +1,6 @@
 export const messageList = [
   {
-    id: 1,
+    id: 11,
     // 用于本地添加一条消息后 发给后台 后台生产消息后通过这个localId告诉我给这条消息加一个id
     localId: '某个唯一值',
     // 某组对话
@@ -24,7 +24,7 @@ export const messageList = [
     // },
     // // 3: 回收消息 玩家发钱对应的元宝给运营回收
     // receiptMsg: {
-    //   conut: 1000,
+    //   conut: 1000, // 单位是厘，显示为元除以1000
     //   alipay: '', // 支付宝帐号
     //   wechat: '' // 微信帐号
     // },
@@ -36,7 +36,7 @@ export const messageList = [
     timestamp: 1537280417091 // 秒
   },
   {
-    id: 2,
+    id: 12,
     localId: '某个唯一值',
     // 这条消息中senderId是当前用户 receiverId是对方 所以消息排列在右边
     threadId: 44,
@@ -48,7 +48,38 @@ export const messageList = [
     timestamp: 1537280417091
   },
   {
-    id: 3,
+    id: 21,
+    localId: '某个唯一值',
+    threadId: 44,
+    senderId: 33,
+    receiverId: 44,
+    status: 1,
+    type: 2,
+    // 发货消息 运营发钱对应的元宝给玩家 senderId一定是当前用户(运营) 接受者一定是对方(玩家)
+    deliverMsg: {
+      type: 'money', // 'money'
+      count: 100000 // 单位是厘，显示为元除以1000
+    },
+    timestamp: 1537280417091
+  },
+  {
+    id: 31,
+    localId: '某个唯一值',
+    threadId: 44,
+    senderId: 44,
+    receiverId: 33,
+    status: 1,
+    type: 3,
+    // 回收消息 玩家发钱对应的元宝给运营回收 senderId一定是对方(玩家) 接受者一定是当前用户(运营)
+    receiptMsg: {
+      count: 143590,
+      alipay: 'sfsd@alipay.com',
+      wechat: '18666663254'
+    },
+    timestamp: 1537280417091
+  },
+  {
+    id: 13,
     localId: '某个唯一值',
     threadId: 44,
     senderId: 44,
@@ -59,7 +90,7 @@ export const messageList = [
     timestamp: 1537280417091
   },
   {
-    id: 4,
+    id: 14,
     localId: '某个唯一值',
     threadId: 44,
     senderId: 33,
@@ -72,6 +103,14 @@ export const messageList = [
 ]
 
 export const user = {
+  // 运营
+  33: {
+    id: 33,
+    avatar: 1,
+    serverName: '游戏服王霸天下',
+    charName: '老子是运营'
+  },
+  // 玩家
   44: {
     id: 44,
     avatar: 1,
