@@ -17,7 +17,7 @@ const GlobalHeader = () => {
   return (
     <div style={{ height: '100%', padding: '0 10px' }}>
       <Dropdown overlay={menu}>
-        <div className="avatar-dropdown-link"
+        <div className="layout-avatar-dropdown-link"
           style={{ float: 'right', height: '100%', cursor: 'pointer', padding: '0 20px' }}>
           <Avatar size="small" style={{
             color: '#fff',

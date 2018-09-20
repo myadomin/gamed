@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import { Avatar } from 'antd'
-import s from './index.css'
+import './index.styl'
 import { messageList, user } from '@/mock/imData'
 import moment from 'moment'
 
@@ -14,39 +14,39 @@ export default class MessageList extends Component {
   render () {
     const imgUrl = require('@/assets/11.jpg')
 
-    const leftText = (item) => (<div className={s.leftText}>
+    const leftText = (item) => (<div className="leftText">
       <Avatar shape="square" size={32} src={imgUrl} />
-      <div className={s.leftTextItem}>
+      <div className="leftTextItem">
         <p>{item.text}</p>
-        <p className={s.timestamp}>{moment(item.timestamp).format('MM-DD: HH:mm:ss')}</p>
-        <span className={s.leftArrow}></span>
+        <p className="timestamp">{moment(item.timestamp).format('MM-DD: HH:mm:ss')}</p>
+        <span className="leftArrow"></span>
       </div>
     </div>)
-    const rightText = (item) => (<div className={s.rightText}>
-      <div className={s.rightTextItem}>
+    const rightText = (item) => (<div className="rightText">
+      <div className="rightTextItem">
         <p>{item.text}</p>
-        <p className={s.timestamp}>{moment(item.timestamp).format('MM-DD: HH:mm:ss')}</p>
-        <span className={s.rightArrow}></span>
+        <p className="timestamp">{moment(item.timestamp).format('MM-DD: HH:mm:ss')}</p>
+        <span className="rightArrow"></span>
       </div>
       <Avatar shape="square" size={32} src={imgUrl} />
     </div>)
 
-    const deliverMsg = (item) => (<div className={s.rightText}>
-      <div className={s.rightDeliverReceiptItem}>
+    const deliverMsg = (item) => (<div className="rightText">
+      <div className="rightDeliverReceiptItem">
         <ul>
           <li>发货：{user[item.senderId].charName}</li>
           <li>收货：{user[item.receiverId].charName}</li>
           <li>金额：{item.deliverMsg.count / 1000}元</li>
         </ul>
-        <p className={s.timestamp}>{moment(item.timestamp).format('MM-DD: HH:mm:ss')}</p>
-        <span className={s.rightDeliverReceiptArrow}></span>
+        <p className="timestamp">{moment(item.timestamp).format('MM-DD: HH:mm:ss')}</p>
+        <span className="rightDeliverReceiptArrow"></span>
       </div>
       <Avatar shape="square" size={32} src={imgUrl} />
     </div>)
 
-    const receiptMsg = (item) => (<div className={s.leftText}>
+    const receiptMsg = (item) => (<div className="leftText">
       <Avatar shape="square" size={32} src={imgUrl} />
-      <div className={s.leftDeliverReceiptItem}>
+      <div className="leftDeliverReceiptItem">
         <ul>
           <li>请求回收：{user[item.senderId].charName}</li>
           <li>回收者：{user[item.receiverId].charName}</li>
@@ -54,8 +54,8 @@ export default class MessageList extends Component {
           <li>支付宝收款：{item.receiptMsg.alipay}</li>
           <li>微信收款：{item.receiptMsg.wechat}</li>
         </ul>
-        <p className={s.timestamp}>{moment(item.timestamp).format('MM-DD: HH:mm:ss')}</p>
-        <span className={s.leftDeliverReceiptArrow}></span>
+        <p className="timestamp">{moment(item.timestamp).format('MM-DD: HH:mm:ss')}</p>
+        <span className="leftDeliverReceiptArrow"></span>
       </div>
     </div>)
 

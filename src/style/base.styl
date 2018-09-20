@@ -2,8 +2,6 @@
  * Eric Meyer's Reset CSS v2.0 (http://meyerweb.com/eric/tools/css/reset/)
  * http://cssreset.com
  */
-
-/* webpack已设置 这个文件不启用css module */
 html, body, div, span, applet, object, iframe,
 h1, h2, h3, h4, h5, h6, p, blockquote, pre,
 a, abbr, acronym, address, big, cite, code,
@@ -73,8 +71,7 @@ html, body {
 	background: rgba(234, 234, 234, 0.2);
 }
 
-/* base.css也是css module的，而css module只对class id生效，也就是下面的才有css module hash，上面的元素选择器无效，是全局的 */
-/* ant-d全局样式改造 */
+// ant-d全局样式改造
 :global .ant-list-item-meta-title {
 	margin-bottom: 0px
 }

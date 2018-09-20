@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import { Row, Col } from 'antd'
-import s from './index.css'
+import './index.styl'
 import AddChatter from './AddChatter'
 import ChatterList from './ChatterList'
 import MessageList from './MessageList'
@@ -14,22 +14,22 @@ export default class workIM extends Component {
 
   render () {
     return (
-      <div className={s.wrap}>
-        <div className={s.left}>
-          <div className={s.leftTop}>
+      <div className="workIM-wrap">
+        <div className="left">
+          <div className="leftTop">
             <AddChatter />
           </div>
-          <div className={s.leftBottom}>
-            <div className={s.leftBottomWrap}>
+          <div className="leftBottom">
+            <div className="leftBottomWrap">
               <ChatterList />
             </div>
           </div>
         </div>
-        <div className={s.right}>
-          <div className={s.rightTop}>
+        <div className="right">
+          <div className="rightTop">
             <MessageList />
           </div>
-          <div className={s.rightBottom}>
+          <div className="rightBottom">
             rightBottom
           </div>
         </div>

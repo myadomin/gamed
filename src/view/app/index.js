@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import { Layout, Menu, Icon } from 'antd'
 import { Route, Link, withRouter } from 'react-router-dom'
-import s from './index.css'
+import './index.styl'
 import GlobalHeader from './GlobalHeader'
 import WorkIM from '@/view/workIM'
 import Bill from '@/view/bill'
@@ -31,9 +31,9 @@ class App extends Component {
           // onBreakpoint={(broken) => { console.log(broken) }}
           // onCollapse={(collapsed, type) => { console.log(collapsed, type) }}
         >
-          <div className={s.logo}>
-            <img src={imgUrl} className={s.logoSvg}></img>
-            <h1 className={s.h1}>啊啊啊啊附带</h1>
+          <div className="layout-logo">
+            <img src={imgUrl} className="layout-logoSvg"></img>
+            <h1 className="layout-h1">啊啊啊啊附带</h1>
           </div>
           <Menu theme="dark" mode="inline"
             selectedKeys={[current]}
