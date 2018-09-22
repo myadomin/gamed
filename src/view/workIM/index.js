@@ -4,6 +4,7 @@ import './index.styl'
 import AddChatter from './AddChatter'
 import ChatterList from './ChatterList'
 import MessageList from './MessageList'
+import SubmitArea from './SubmitArea'
 
 export default class workIM extends Component {
   constructor (props, context) {
@@ -30,7 +31,7 @@ export default class workIM extends Component {
             <MessageList />
           </div>
           <div className="rightBottom">
-            rightBottom
+            <SubmitArea />
           </div>
         </div>
         <div style={{ clear: 'both' }}></div>
