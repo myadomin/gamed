@@ -14,25 +14,25 @@ export default class MessageList extends Component {
   render () {
     const imgUrl = require('@/assets/11.jpg')
     // 普通文本消息
-    const leftText = (item) => (<div className="leftText">
+    const leftText = (item) => (<div className="leftAlign">
       <Avatar shape="square" size={32} src={imgUrl} />
       <div className="leftTextItem">
         <p>{item.text}</p>
         <p className="timestamp">{moment(item.timestamp).format('MM-DD: HH:mm:ss')}</p>
-        <span className="leftArrow"></span>
+        <span className="leftTextArrow"></span>
       </div>
     </div>)
-    const rightText = (item) => (<div className="rightText">
+    const rightText = (item) => (<div className="rightAlign">
       <div className="rightTextItem">
         <p>{item.text}</p>
         <p className="timestamp">{moment(item.timestamp).format('MM-DD: HH:mm:ss')}</p>
-        <span className="rightArrow"></span>
+        <span className="rightTextArrow"></span>
       </div>
       <Avatar shape="square" size={32} src={imgUrl} />
     </div>)
 
     // 运营发货给玩家
-    const deliverMsg = (item) => (<div className="rightText">
+    const deliverMsg = (item) => (<div className="rightAlign">
       <div className="rightDeliverReceiptItem">
         <ul>
           <li>运营：{user[item.senderId].charName}</li>
@@ -46,7 +46,7 @@ export default class MessageList extends Component {
     </div>)
 
     // 玩家发回收给运营
-    const receiptMsg = (item) => (<div className="leftText">
+    const receiptMsg = (item) => (<div className="leftAlign">
       <Avatar shape="square" size={32} src={imgUrl} />
       <div className="leftDeliverReceiptItem">
         <ul>
@@ -60,9 +60,9 @@ export default class MessageList extends Component {
         <span className="leftDeliverReceiptArrow"></span>
       </div>
     </div>)
-    
+
     // 管理员补货给运营 运营是当前用户
-    const leftSupple = (item) => (<div className="leftText">
+    const leftSupple = (item) => (<div className="leftAlign">
       <Avatar shape="square" size={32} src={imgUrl} />
       <div className="leftSuppleItem">
         <ul>
@@ -75,7 +75,7 @@ export default class MessageList extends Component {
       </div>
     </div>)
     // 管理员补货给运营 管理员是当前用户
-    const rightSupple = (item) => (<div className="rightText">
+    const rightSupple = (item) => (<div className="rightAlign">
       <div className="rightSuppleItem">
         <ul>
           <li>管理员：{user[item.senderId].charName}</li>
@@ -91,7 +91,7 @@ export default class MessageList extends Component {
     const getMessageItem = (item) => {
       switch (item.type) {
         case 1:
-          // 文本消息 item.senderId === item.threadId 说明senderId是对方 receiverId是当前用户 所以文本消息排列在左边
+          // 文本消息 如果item.senderId === item.threadId 说明senderId是对方 receiverId是当前用户 所以文本消息排列在左边
           return item.senderId === item.threadId ? leftText(item) : rightText(item)
         case 2:
           // 发货消息 运营发钱对应的元宝给玩家 senderId一定是当前用户(运营) 接受者一定是对方(玩家) 排列在右边

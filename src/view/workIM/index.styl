@@ -3,6 +3,7 @@
   border: 1px solid #d9d9d9
   box-shadow: 5px 5px 5px #ddd
   height: calc(100vh - 210px)
+  // index
   .left 
     float: left
     width: 280px
@@ -26,21 +27,25 @@
   .rightBottom 
     height: 200px
     background: #fff
-  .chatterList-chatters:hover 
+  
+  // chatterList
+  .chatters:hover 
     background: #e8e8e8
-  .chatterList-active 
+  .chatters-active 
     background: #dfdfdf !important
-  .leftText 
+
+  // messageList
+  .leftAlign 
     margin: 10px 0
     display: flex
     align-items: flex-start
     justify-content: flex-start
-  .rightText 
+  .rightAlign 
     margin: 10px 0
     display: flex
     align-items: flex-start
     justify-content: flex-end
-  .textitem
+  .message
     max-width: 40%
     position: relative
     border: 1px solid #eee
@@ -48,14 +53,12 @@
     line-height: 18px
     padding: 7px
     color: #333
-  .leftTextItem
-    @extends .workIM-wrap .textitem
+  .leftMessage
+    @extends .workIM-wrap .message
     margin-left: 12px
-    background: $white
-  .rightTextItem
-    @extends .workIM-wrap .textitem
+  .rightMessage
+    @extends .workIM-wrap .message
     margin-right: 12px
-    background: $white
   .arrow
     width: 10px
     height: 10px
@@ -69,47 +72,51 @@
     left: -6px
     border-left: 1px solid #eee
     border-bottom: 1px solid #eee
-    background: $white
   .rightArrow
     @extends .workIM-wrap .arrow
     right: -6px
     border-right: 1px solid #eee
     border-top: 1px solid #eee
-    background: $white
   .timestamp 
     font-size: 12px
     opacity: 0.5
+
+  .leftTextItem
+    @extends .workIM-wrap .leftMessage
+    background: $white
+  .rightTextItem
+    @extends .workIM-wrap .rightMessage
+    background: $white
+  .leftTextArrow
+    @extends .workIM-wrap .leftArrow
+    background: $white
+  .rightTextArrow
+    @extends .workIM-wrap .rightArrow
+    background: $white
     
   .leftDeliverReceiptItem 
-    @extends .workIM-wrap .leftTextItem
+    @extends .workIM-wrap .leftMessage
     background: $yellow
   .rightDeliverReceiptItem 
-    @extends .workIM-wrap .rightTextItem
+    @extends .workIM-wrap .rightMessage
     background: $yellow
   .leftDeliverReceiptArrow 
     @extends .workIM-wrap .leftArrow
     background: $yellow
-    border-left: 1px solid transparent
-    border-bottom: 1px solid transparent
   .rightDeliverReceiptArrow 
     @extends .workIM-wrap .rightArrow
     background: $yellow
-    border-left: 1px solid transparent
-    border-bottom: 1px solid transparent
 
   .leftSuppleItem 
-    @extends .workIM-wrap .leftTextItem
+    @extends .workIM-wrap .leftMessage
     background: $red
   .rightSuppleItem 
-    @extends .workIM-wrap .rightTextItem
+    @extends .workIM-wrap .rightMessage
     background: $red
   .leftSuppleArrow 
     @extends .workIM-wrap .leftArrow
     background: $red
-    border-left: 1px solid transparent
-    border-bottom: 1px solid transparent
   .rightSuppleArrow 
     @extends .workIM-wrap .rightArrow
     background: $red
-    border-left: 1px solid transparent
-    border-bottom: 1px solid transparent
+    

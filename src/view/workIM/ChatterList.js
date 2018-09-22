@@ -74,7 +74,7 @@ export default class ChatterList extends Component {
         renderItem={item => (
           <List.Item
             style={{ padding: '12px 20px', cursor: 'default', borderBottom: '1px solid #e0e0e0' }}
-            className={ item.id === currentId ? 'chatterList-active chatterList-chatters' : 'chatterList-chatters' }
+            className={ item.id === currentId ? 'chatters-active chatters' : 'chatters' }
             onClick={() => this.handleOnClickChatter(item.id)}>
             <List.Item.Meta
               avatar={<Avatar shape="square" size={42} src={imgUrl} />}
