@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import { Tabs, Button, Input, Row, Col, Form } from 'antd'
 
-export default class AddChatter extends Component {
+export default class SubmitArea extends Component {
   constructor (props, context) {
     super(props)
     this.state = {
@@ -21,6 +21,7 @@ export default class AddChatter extends Component {
     const count = 54321
     const type = '元宝'
     const { tabKey } = this.state
+    const { showDrawer } = this.props
     return (
       <div style={{ padding: '0 10px' }}>
         <div className="submitTabs" style={{ height: '154px' }}>
@@ -59,8 +60,8 @@ export default class AddChatter extends Component {
             </Tabs.TabPane>
           </Tabs>
         </div>
-        <div style={{ padding: '7px' }}>
-          <Button style={{ float: 'left' }}>运营回收表</Button>
+        <div style={{ padding: '7px 0' }}>
+          <Button style={{ float: 'left' }} onClick={showDrawer}>运营回收表</Button>
           {tabKey === 'chat'
             ? <Button type="primary" style={{ float: 'right' }}>发送</Button>
             : <Button type="primary" style={{ float: 'right' }}>发货</Button>}

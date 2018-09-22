@@ -14,25 +14,18 @@ export default class MessageList extends Component {
   render () {
     const imgUrl = require('@/assets/11.jpg')
     // 普通文本消息
-    const leftText = (item) => (<div className="leftAlign">
+    const textMsg = (item, isLeftText) => (<div className={isLeftText ? 'leftAlign' : 'rightAlign'}>
       <Avatar shape="square" size={32} src={imgUrl} />
-      <div className="leftTextItem">
-        <p>{item.text}</p>
+      <div className={isLeftText ? 'leftTextItem' : 'rightTextItem'}>
+        <p>{item.textMsg}</p>
         <p className="timestamp">{moment(item.timestamp).format('MM-DD: HH:mm:ss')}</p>
-        <span className="leftTextArrow"></span>
+        <span className={isLeftText ? 'leftTextArrow' : 'rightTextArrow'}></span>
       </div>
-    </div>)
-    const rightText = (item) => (<div className="rightAlign">
-      <div className="rightTextItem">
-        <p>{item.text}</p>
-        <p className="timestamp">{moment(item.timestamp).format('MM-DD: HH:mm:ss')}</p>
-        <span className="rightTextArrow"></span>
-      </div>
-      <Avatar shape="square" size={32} src={imgUrl} />
     </div>)
 
     // 运营发货给玩家
     const deliverMsg = (item) => (<div className="rightAlign">
+      <Avatar shape="square" size={32} src={imgUrl} />
       <div className="rightDeliverReceiptItem">
         <ul>
           <li>运营：{user[item.senderId].charName}</li>
@@ -42,7 +35,6 @@ export default class MessageList extends Component {
         <p className="timestamp">{moment(item.timestamp).format('MM-DD: HH:mm:ss')}</p>
         <span className="rightDeliverReceiptArrow"></span>
       </div>
-      <Avatar shape="square" size={32} src={imgUrl} />
     </div>)
 
     // 玩家发回收给运营
@@ -61,38 +53,26 @@ export default class MessageList extends Component {
       </div>
     </div>)
 
-    // 管理员补货给运营 运营是当前用户
-    const leftSupple = (item) => (<div className="leftAlign">
+    // 管理员补货给运营
+    const SuppleMsg = (item, isLeftSupple) => (<div className={isLeftSupple ? 'leftAlign' : 'rightAlign'}>
       <Avatar shape="square" size={32} src={imgUrl} />
-      <div className="leftSuppleItem">
+      <div className={isLeftSupple ? 'leftSuppleItem' : 'rightSuppleItem'}>
         <ul>
           <li>管理员：{user[item.senderId].charName}</li>
           <li>给运营：{user[item.receiverId].charName}</li>
           <li>补货：{item.suppleMsg.count / 1000}元</li>
         </ul>
         <p className="timestamp">{moment(item.timestamp).format('MM-DD: HH:mm:ss')}</p>
-        <span className="leftSuppleArrow"></span>
+        <span className={isLeftSupple ? 'leftSuppleArrow' : 'rightSuppleArrow'}></span>
       </div>
-    </div>)
-    // 管理员补货给运营 管理员是当前用户
-    const rightSupple = (item) => (<div className="rightAlign">
-      <div className="rightSuppleItem">
-        <ul>
-          <li>管理员：{user[item.senderId].charName}</li>
-          <li>给运营：{user[item.receiverId].charName}</li>
-          <li>补货：{item.suppleMsg.count / 1000}元</li>
-        </ul>
-        <p className="timestamp">{moment(item.timestamp).format('MM-DD: HH:mm:ss')}</p>
-        <span className="rightSuppleArrow"></span>
-      </div>
-      <Avatar shape="square" size={32} src={imgUrl} />
     </div>)
 
     const getMessageItem = (item) => {
       switch (item.type) {
         case 1:
           // 文本消息 如果item.senderId === item.threadId 说明senderId是对方 receiverId是当前用户 所以文本消息排列在左边
-          return item.senderId === item.threadId ? leftText(item) : rightText(item)
+          const isLeftText = item.senderId === item.threadId
+          return textMsg(item, isLeftText)
         case 2:
           // 发货消息 运营发钱对应的元宝给玩家 senderId一定是当前用户(运营) receiverId一定是对方(玩家) 排列在右边
           return deliverMsg(item)
@@ -101,7 +81,8 @@ export default class MessageList extends Component {
           return receiptMsg(item)
         case 4:
           // senderId一定是管理员 如果item.senderId === item.threadId 消息排列在左边
-          return item.senderId === item.threadId ? leftSupple(item) : rightSupple(item)
+          const isLeftSupple = item.senderId === item.threadId
+          return SuppleMsg(item, isLeftSupple)
         case 99:
           return ''
         default:

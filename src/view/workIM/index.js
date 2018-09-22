@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { Row, Col } from 'antd'
+import { Drawer } from 'antd'
 import './index.styl'
 import AddChatter from './AddChatter'
 import ChatterList from './ChatterList'
@@ -10,10 +10,22 @@ export default class workIM extends Component {
   constructor (props, context) {
     super(props)
     this.state = {
+      isShowDrawer: false
     }
+    this.closeDrawer = this.closeDrawer.bind(this)
+    this.showDrawer = this.showDrawer.bind(this)
+  }
+
+  closeDrawer () {
+    this.setState({ isShowDrawer: false })
+  }
+
+  showDrawer () {
+    this.setState({ isShowDrawer: true })
   }
 
   render () {
+    const { isShowDrawer } = this.state
     return (
       <div className="workIM-wrap">
         <div className="left">
@@ -22,7 +34,7 @@ export default class workIM extends Component {
           </div>
           <div className="leftBottom">
             <div className="leftBottomWrap">
-              <ChatterList />
+              <ChatterList/>
             </div>
           </div>
         </div>
@@ -31,10 +43,19 @@ export default class workIM extends Component {
             <MessageList />
           </div>
           <div className="rightBottom">
-            <SubmitArea />
+            <SubmitArea showDrawer={this.showDrawer} />
           </div>
         </div>
         <div style={{ clear: 'both' }}></div>
+        <Drawer
+          title="Create"
+          width={720}
+          placement="right"
+          closable={false}
+          onClose={this.closeDrawer}
+          visible={isShowDrawer}
+        >
+        </Drawer>
       </div>
     )
   }
