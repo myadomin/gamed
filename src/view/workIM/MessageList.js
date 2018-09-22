@@ -36,8 +36,8 @@ export default class MessageList extends Component {
       <div className="rightDeliverReceiptItem">
         <ul>
           <li>运营：{user[item.senderId].charName}</li>
-          <li>发货：{item.deliverMsg.count / 1000}元</li>
           <li>给玩家：{user[item.receiverId].charName}</li>
+          <li>发货：{item.deliverMsg.count / 1000}元</li>
         </ul>
         <p className="timestamp">{moment(item.timestamp).format('MM-DD: HH:mm:ss')}</p>
         <span className="rightDeliverReceiptArrow"></span>
@@ -51,10 +51,10 @@ export default class MessageList extends Component {
       <div className="leftDeliverReceiptItem">
         <ul>
           <li>玩家：{user[item.senderId].charName}</li>
+          <li>向运营：{user[item.receiverId].charName}</li>
           <li>请求回收：{item.receiptMsg.count / 1000}元</li>
           <li>支付宝收款：{item.receiptMsg.alipay}</li>
           <li>微信收款：{item.receiptMsg.wechat}</li>
-          <li>回收运营：{user[item.receiverId].charName}</li>
         </ul>
         <p className="timestamp">{moment(item.timestamp).format('MM-DD: HH:mm:ss')}</p>
         <span className="leftDeliverReceiptArrow"></span>
@@ -67,8 +67,8 @@ export default class MessageList extends Component {
       <div className="leftSuppleItem">
         <ul>
           <li>管理员：{user[item.senderId].charName}</li>
-          <li>补货：{item.suppleMsg.count / 1000}元</li>
           <li>给运营：{user[item.receiverId].charName}</li>
+          <li>补货：{item.suppleMsg.count / 1000}元</li>
         </ul>
         <p className="timestamp">{moment(item.timestamp).format('MM-DD: HH:mm:ss')}</p>
         <span className="leftSuppleArrow"></span>
@@ -79,8 +79,8 @@ export default class MessageList extends Component {
       <div className="rightSuppleItem">
         <ul>
           <li>管理员：{user[item.senderId].charName}</li>
-          <li>补货：{item.suppleMsg.count / 1000}元</li>
           <li>给运营：{user[item.receiverId].charName}</li>
+          <li>补货：{item.suppleMsg.count / 1000}元</li>
         </ul>
         <p className="timestamp">{moment(item.timestamp).format('MM-DD: HH:mm:ss')}</p>
         <span className="rightSuppleArrow"></span>
@@ -94,12 +94,13 @@ export default class MessageList extends Component {
           // 文本消息 如果item.senderId === item.threadId 说明senderId是对方 receiverId是当前用户 所以文本消息排列在左边
           return item.senderId === item.threadId ? leftText(item) : rightText(item)
         case 2:
-          // 发货消息 运营发钱对应的元宝给玩家 senderId一定是当前用户(运营) 接受者一定是对方(玩家) 排列在右边
+          // 发货消息 运营发钱对应的元宝给玩家 senderId一定是当前用户(运营) receiverId一定是对方(玩家) 排列在右边
           return deliverMsg(item)
         case 3:
-          // 回收消息 玩家发钱对应的元宝给运营回收 senderId一定是对方(玩家) 接受者一定是当前用户(运营) 排列在左边
+          // 回收消息 玩家发钱对应的元宝给运营回收 senderId一定是对方(玩家) receiverId一定是当前用户(运营) 排列在左边
           return receiptMsg(item)
         case 4:
+          // senderId一定是管理员 如果item.senderId === item.threadId 消息排列在左边
           return item.senderId === item.threadId ? leftSupple(item) : rightSupple(item)
         case 99:
           return ''
