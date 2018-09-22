@@ -122,6 +122,17 @@ export const messageList = [
       count: 100000 // 单位是厘，显示为元除以1000
     },
     timestamp: 1537280417091
+  },
+  {
+    id: 91,
+    localId: '某个唯一值',
+    threadId: 3,
+    senderId: 2,
+    receiverId: 3,
+    status: 1,
+    // 空消息
+    type: 99,
+    timestamp: 1537280417091
   }
 ]
 
