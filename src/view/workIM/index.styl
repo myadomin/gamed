@@ -46,20 +46,19 @@
     border: 1px solid #eee
     border-radius: 4px
     line-height: 18px
-    background: #fff
     padding: 7px
     color: #333
   .leftTextItem
     @extends .workIM-wrap .textitem
     margin-left: 12px
+    background: $white
   .rightTextItem
     @extends .workIM-wrap .textitem
     margin-right: 12px
-    background: $green
+    background: $white
   .arrow
     width: 10px
     height: 10px
-    background: #fff
     position: absolute
     content: ''
     top: 10px
@@ -70,15 +69,17 @@
     left: -6px
     border-left: 1px solid #eee
     border-bottom: 1px solid #eee
+    background: $white
   .rightArrow
     @extends .workIM-wrap .arrow
     right: -6px
-    border-right: 1px solid transparent
-    border-top: 1px solid transparent
-    background: $green
+    border-right: 1px solid #eee
+    border-top: 1px solid #eee
+    background: $white
   .timestamp 
     font-size: 12px
     opacity: 0.5
+    
   .leftDeliverReceiptItem 
     @extends .workIM-wrap .leftTextItem
     background: $yellow
@@ -93,5 +94,22 @@
   .rightDeliverReceiptArrow 
     @extends .workIM-wrap .rightArrow
     background: $yellow
+    border-left: 1px solid transparent
+    border-bottom: 1px solid transparent
+
+  .leftSuppleItem 
+    @extends .workIM-wrap .leftTextItem
+    background: $red
+  .rightSuppleItem 
+    @extends .workIM-wrap .rightTextItem
+    background: $red
+  .leftSuppleArrow 
+    @extends .workIM-wrap .leftArrow
+    background: $red
+    border-left: 1px solid transparent
+    border-bottom: 1px solid transparent
+  .rightSuppleArrow 
+    @extends .workIM-wrap .rightArrow
+    background: $red
     border-left: 1px solid transparent
     border-bottom: 1px solid transparent
