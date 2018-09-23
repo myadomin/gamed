@@ -10,19 +10,20 @@
     height: 100%
   .leftTop 
     height: 100px
-    background: #e8e8e8
+    background: #eee
   .leftBottom 
     height: calc(100% - 100px)
-    background: #f0f0f0
+    background: #fefefe
     overflow: auto
   .right 
     float: right
     width: calc(100% - 280px)
     height: 100%
+    border-left: 1px solid #eee
   .rightTop 
     height: calc(100% - 200px)
     overflow: auto
-    background: #fafafa
+    background: #fefefe
     border-bottom: 1px solid #eee
   .rightBottom 
     height: 200px
@@ -30,18 +31,18 @@
   
   // chatterList
   .chatters:hover 
-    background: #e8e8e8
+    background: #f3f3f3
   .chatters-active 
-    background: #dfdfdf !important
+    background: #e6e6e6 !important
 
   // messageList
   .leftAlign 
-    margin: 10px 0
+    margin: 5px 0
     display: flex
     align-items: flex-start
     flex-direction: row
   .rightAlign 
-    margin: 10px 0
+    margin: 5px 0
     display: flex
     align-items: flex-start
     flex-direction: row-reverse
@@ -79,7 +80,7 @@
     border-top: 1px solid #eee
   .timestamp 
     font-size: 12px
-    opacity: 0.5
+    color: #999
 
   .leftTextItem
     @extends .workIM-wrap .leftMessage
