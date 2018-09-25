@@ -45,8 +45,9 @@ export default class MessageList extends Component {
           <li>玩家：{user[item.senderId].charName}</li>
           <li>向运营：{user[item.receiverId].charName}</li>
           <li>请求回收：{item.receiptMsg.count / 1000}元</li>
-          <li>支付宝收款：{item.receiptMsg.alipay}</li>
-          <li>微信收款：{item.receiptMsg.wechat}</li>
+          <li>{item.receiptMsg.alipay && '支付宝帐号：' + item.receiptMsg.alipay.account}</li>
+          <li>{item.receiptMsg.alipay && item.receiptMsg.alipay.username && '支付宝名称：' + item.receiptMsg.alipay.username}</li>
+          <li>{item.receiptMsg.wechat && '微信帐号：' + item.receiptMsg.wechat}</li>
         </ul>
         <p className="timestamp">{moment(item.timestamp).format('MM-DD: HH:mm:ss')}</p>
         <span className="leftDeliverReceiptArrow"></span>

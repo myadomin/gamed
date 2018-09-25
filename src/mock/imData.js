@@ -85,11 +85,18 @@ export const messageList = [
     // 回收消息 玩家发钱对应的元宝给运营回收 senderId一定是对方(玩家) receiverId一定是当前用户(运营) 排列在左边
     receiptMsg: {
       count: 143590,
-      alipay: 'sfsd@alipay.com',
+      alipay: { account: 'sfsd@alipay.com', username: '阿里' },
       wechat: '18666663254'
     },
     timestamp: 1537280417091
   },
+
+  // workIM-wrap不需要外部Padding 不要box-shadow
+  // receiptMsg格式变化 alipay wechat可能某个没有 username也可能没有
+  // 聊天框不要border
+  // 运营回收表放到tab去
+  // tab及回收表都用Icon
+  // 尽量用直角 少用边框
   {
     id: 41,
     localId: '某个唯一值',

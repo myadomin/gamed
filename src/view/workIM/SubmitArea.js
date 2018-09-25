@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { Tabs, Button, Input, Row, Col, Form } from 'antd'
+import { Tabs, Button, Input, Row, Col, Form, Icon } from 'antd'
 
 export default class SubmitArea extends Component {
   constructor (props, context) {
@@ -25,17 +25,21 @@ export default class SubmitArea extends Component {
     return (
       <div style={{ padding: '0 10px' }}>
         <div className="submitTabs" style={{ height: '154px' }}>
-          <Tabs onChange={(tabKey) => this.tabChange(tabKey)}>
-            <Tabs.TabPane tab="聊天" key="chat">
+          <Tabs
+            onChange={(tabKey) => this.tabChange(tabKey)}
+            tabBarExtraContent={<span title="运营回收表" className="recepitTable" onClick={showDrawer}
+            ><Icon type="table" theme="outlined" /></span>}>
+            <Tabs.TabPane tab={<span title="聊天" style={{ padding: '5px' }}><Icon type="message" theme="outlined" /></span>} key="chat">
               <Input.TextArea
                 style={{
                   boxShadow: 'none',
                   resize: 'none',
-                  height: '104px'
+                  height: '104px',
+                  border: 'none'
                 }}
                 onChange={(ev) => this.inputMessage(ev.target.value)} />
             </Tabs.TabPane>
-            <Tabs.TabPane tab="发货" key="deliver">
+            <Tabs.TabPane tab={<span title="发货" style={{ padding: '5px' }}><Icon type="gift" theme="outlined" /></span>} key="deliver">
               <Form className="deliverForm">
                 <Row gutter={24}>
                   <Col span={12}>
@@ -61,7 +65,6 @@ export default class SubmitArea extends Component {
           </Tabs>
         </div>
         <div style={{ padding: '7px 0' }}>
-          <Button style={{ float: 'left' }} onClick={showDrawer}>运营回收表</Button>
           {tabKey === 'chat'
             ? <Button type="primary" style={{ float: 'right' }}>发送</Button>
             : <Button type="primary" style={{ float: 'right' }}>发货</Button>}
