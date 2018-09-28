@@ -51,7 +51,6 @@ export default class workIM extends Component {
           title="Create"
           width={720}
           placement="right"
-          closable={false}
           onClose={this.closeDrawer}
           visible={isShowDrawer}
         >

@@ -35,6 +35,7 @@ export const messageList = [
     // },
     timestamp: 1537280417091 // 秒
   },
+  // todo 点击左上+ 出现spin
   {
     id: 12,
     localId: '某个唯一值',
@@ -90,13 +91,6 @@ export const messageList = [
     },
     timestamp: 1537280417091
   },
-
-  // workIM-wrap不需要外部Padding 不要box-shadow
-  // receiptMsg格式变化 alipay wechat可能某个没有 username也可能没有
-  // 聊天框不要border
-  // 运营回收表放到tab去
-  // tab及回收表都用Icon
-  // 尽量用直角 少用边框
   {
     id: 41,
     localId: '某个唯一值',
