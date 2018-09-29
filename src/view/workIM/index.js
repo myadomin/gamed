@@ -5,27 +5,20 @@ import AddChatter from './AddChatter'
 import ChatterList from './ChatterList'
 import MessageList from './MessageList'
 import SubmitArea from './SubmitArea'
+import { inject, observer } from 'mobx-react'
 
+@inject('workIMStore')
+@observer
 export default class workIM extends Component {
   constructor (props, context) {
     super(props)
     this.state = {
-      isShowDrawer: false
     }
-    this.closeDrawer = this.closeDrawer.bind(this)
-    this.showDrawer = this.showDrawer.bind(this)
-  }
-
-  closeDrawer () {
-    this.setState({ isShowDrawer: false })
-  }
-
-  showDrawer () {
-    this.setState({ isShowDrawer: true })
   }
 
   render () {
-    const { isShowDrawer } = this.state
+    // 不能 { showHiddenDrawer } = this.props.workIMStore 找不到this
+    const { workIMStore } = this.props
     return (
       <div className="workIM-wrap">
         <div className="left">
@@ -43,7 +36,7 @@ export default class workIM extends Component {
             <MessageList />
           </div>
           <div className="rightBottom">
-            <SubmitArea showDrawer={this.showDrawer} />
+            <SubmitArea showDrawer={() => workIMStore.showHiddenDrawer(true)} />
           </div>
         </div>
         <div style={{ clear: 'both' }}></div>
@@ -51,8 +44,8 @@ export default class workIM extends Component {
           title="Create"
           width={720}
           placement="right"
-          onClose={this.closeDrawer}
-          visible={isShowDrawer}
+          onClose={() => workIMStore.showHiddenDrawer(false)}
+          visible={workIMStore.isShowDrawer}
         >
         </Drawer>
       </div>

@@ -22,8 +22,8 @@ const webpackConfigProd = {
       mapConfig: 'http://56.32.3.21/config/qdkjdsj_map_config.js'
     }),
     /* 压缩优化代码开始 */
-    new webpack.optimize.UglifyJsPlugin({ minimize: true })
-    // new BundleAnalyzerPlugin({ analyzerPort: 3011 })
+    new webpack.optimize.UglifyJsPlugin({ minimize: true }),
+    new BundleAnalyzerPlugin({ analyzerPort: 3011 })
   ],
   devtool: 'source-map'
 }

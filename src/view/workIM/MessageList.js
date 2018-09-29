@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import { Avatar } from 'antd'
 import './index.styl'
 import { messageList, user } from '@/mock/imData'
-import moment from 'moment'
+import dayjs from 'dayjs'
 
 export default class MessageList extends Component {
   constructor (props, context) {
@@ -18,7 +18,7 @@ export default class MessageList extends Component {
       <Avatar shape="square" size={32} src={imgUrl} />
       <div className={isLeftText ? 'leftTextItem' : 'rightTextItem'}>
         <p>{item.textMsg}</p>
-        <p className="timestamp">{moment(item.timestamp).format('MM-DD: HH:mm:ss')}</p>
+        <p className="timestamp">{dayjs(item.timestamp).format('MM-DD: HH:mm:ss')}</p>
         <span className={isLeftText ? 'leftTextArrow' : 'rightTextArrow'}></span>
       </div>
     </div>)
@@ -32,7 +32,7 @@ export default class MessageList extends Component {
           <li>给玩家：{user[item.receiverId].charName}</li>
           <li>发货：{item.deliverMsg.count / 1000}元</li>
         </ul>
-        <p className="timestamp">{moment(item.timestamp).format('MM-DD: HH:mm:ss')}</p>
+        <p className="timestamp">{dayjs(item.timestamp).format('MM-DD: HH:mm:ss')}</p>
         <span className="rightDeliverReceiptArrow"></span>
       </div>
     </div>)
@@ -49,7 +49,7 @@ export default class MessageList extends Component {
           <li>{item.receiptMsg.alipay && item.receiptMsg.alipay.username && '支付宝名称：' + item.receiptMsg.alipay.username}</li>
           <li>{item.receiptMsg.wechat && '微信帐号：' + item.receiptMsg.wechat}</li>
         </ul>
-        <p className="timestamp">{moment(item.timestamp).format('MM-DD: HH:mm:ss')}</p>
+        <p className="timestamp">{dayjs(item.timestamp).format('MM-DD: HH:mm:ss')}</p>
         <span className="leftDeliverReceiptArrow"></span>
       </div>
     </div>)
@@ -63,7 +63,7 @@ export default class MessageList extends Component {
           <li>给运营：{user[item.receiverId].charName}</li>
           <li>补货：{item.suppleMsg.count / 1000}元</li>
         </ul>
-        <p className="timestamp">{moment(item.timestamp).format('MM-DD: HH:mm:ss')}</p>
+        <p className="timestamp">{dayjs(item.timestamp).format('MM-DD: HH:mm:ss')}</p>
         <span className={isLeftSupple ? 'leftSuppleArrow' : 'rightSuppleArrow'}></span>
       </div>
     </div>)

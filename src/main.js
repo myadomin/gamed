@@ -5,9 +5,19 @@ import ReactDOM from 'react-dom'
 import App from '@/view/app'
 import '@/style/base.styl'
 import { HashRouter } from 'react-router-dom'
+import { Provider } from 'mobx-react'
+import workIMStore from '@/stores/workIMStore.js'
+
+const stores = {
+  workIMStore
+}
+
 ReactDOM.render(
-  <HashRouter>
-    <App />
-  </HashRouter>,
+  // <Provider workIMStore={workIMStore}>
+  <Provider {...stores}>
+    <HashRouter>
+      <App />
+    </HashRouter>
+  </Provider>,
   document.getElementById('root')
 )
