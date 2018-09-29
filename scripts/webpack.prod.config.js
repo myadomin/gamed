@@ -5,7 +5,6 @@ const merge = require('webpack-merge')
 const webpackConfigBase = require('./webpack.base.config')
 const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin
 const HtmlWebpackPlugin = require('html-webpack-plugin')
-const rimraf = require('rimraf')
 
 function resolve (relatedPath) {
   return path.join(__dirname, relatedPath)
@@ -24,7 +23,6 @@ const webpackConfigProd = {
     }),
     /* 压缩优化代码开始 */
     new webpack.optimize.UglifyJsPlugin({ minimize: true })
-    // 分析代码
     // new BundleAnalyzerPlugin({ analyzerPort: 3011 })
   ],
   devtool: 'source-map'

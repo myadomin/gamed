@@ -8,7 +8,7 @@ function resolve (relatedPath) {
 const webpackConfigBase = {
   entry: {
     // vendor
-    vendor: ['react', 'react-dom', 'redux', 'react-redux', 'moment', 'antd'],
+    vendor: ['react', 'react-dom', 'mobx', 'mobx-react', 'moment', 'antd'],
     // 入口文件
     main: resolve('../src/main.js')
   },

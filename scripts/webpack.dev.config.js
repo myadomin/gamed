@@ -4,7 +4,6 @@ const merge = require('webpack-merge')
 const webpackConfigBase = require('./webpack.base.config')
 const HtmlWebpackPlugin = require('html-webpack-plugin')
 var FriendlyErrorsWebpackPlugin = require('friendly-errors-webpack-plugin')
-const WebpackNotifierPlugin = require('webpack-notifier')
 
 function resolve (relatedPath) {
   return path.join(__dirname, relatedPath)
