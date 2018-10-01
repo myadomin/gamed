@@ -22,7 +22,7 @@ export default class workIM extends Component {
       rpcId: 'getMessagesAndUsers',
       data: null,
       success: (res) => {
-        console.log(res.data)
+        console.log('workIMStore----', res.data)
       }
     })
   }

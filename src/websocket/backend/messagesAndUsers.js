@@ -166,6 +166,7 @@ const messagesAndUsers = {
   users
 }
 
-export {
-  messagesAndUsers
-}
+module.exports = messagesAndUsers
+// export {
+//   messagesAndUsers
+// }

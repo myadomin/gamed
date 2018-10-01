@@ -1,34 +1,41 @@
 let heartbeatTimer = null
 let createTimer = null
 
-// websocket初始化
-const initWebsocket = () => {
+const heartbeat = () => {
+  window.clearInterval(heartbeatTimer)
+  heartbeatTimer = window.setInterval(() => {
+    wsSend({
+      rpcId: 'heartbeat',
+      data: 'have heartbeat?',
+      success: (res) => {
+        console.log('heartbeat----', res.data)
+      }
+    })
+  }, 10000)
+}
+
+// 初始化websocket
+const wsInit = (options) => {
   window.websocket = new window.WebSocket('ws://localhost:3001')
   // 连接上后开始发送心跳
   window.websocket.onopen = (evt) => {
     console.log('WebSocket connected!')
-    window.clearInterval(heartbeatTimer)
-    heartbeatTimer = window.setInterval(() => {
-      wsSend({
-        rpcId: 'heartbeat',
-        data: new Date().getTime(),
-        success: (res) => {
-          console.log(res.data)
-        }
-      })
-    }, 10000)
+    heartbeat()
+    // 重连没有option 不需要发消息
+    options && wsSend(options)
   }
   // 连接断开后重连
   window.websocket.onclose = (evt) => {
-    window.clearInterval(createTimer)
     window.clearInterval(heartbeatTimer)
+    window.clearInterval(createTimer)
     createTimer = window.setInterval(() => {
       if (window.websocket && window.websocket.readyState === 1) {
         // 已与服务器建立连接 取消重连定时器
         window.clearInterval(createTimer)
       } else {
         console.log('websocket重连中........')
-        initWebsocket()
+        // 重连
+        wsInit()
       }
     }, 5000)
   }
@@ -37,15 +44,15 @@ const initWebsocket = () => {
     console.error('onerror: WebSocket连接服务器错误')
   }
 }
-initWebsocket()
 
-// 客户端发送消息给服务端
+// websocket发送消息
 const wsSend = (options) => {
-  // 发送消息
-  if (window.websocket && window.websocket.readyState === 1) {
+  if (window.websocket) {
+    // 有WebSocket 直接发送消息
     window.websocket.send(JSON.stringify({ rpcId: options.rpcId, data: options.data }))
   } else {
-    console.error('不能发送消息，因为WebSocket没连接到服务器')
+    // 没有WebSocket 创建WebSocket再发送消息
+    wsInit(options)
   }
   // 接收消息
   window.websocket.onmessage = (evt) => {
@@ -54,6 +61,5 @@ const wsSend = (options) => {
 }
 
 export {
-  initWebsocket,
   wsSend
 }

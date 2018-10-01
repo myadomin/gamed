@@ -13,7 +13,10 @@ wss.on('connection', (ws) => {
       case 'heartbeat':
         return sendWsMsg('heartbeat', 'heartbeat: WebSocket is connectting')
       case 'getMessagesAndUsers':
+        // console.log(12)
+        // console.log(require('./messagesAndUsers'))
         return sendWsMsg('getMessagesAndUsers', require('./messagesAndUsers'))
+        // return sendWsMsg('getMessagesAndUsers', '12')
       default:
         console.log('服务端：没有找到此消息对应的rpcId')
     }
