@@ -7,10 +7,14 @@ import '@/style/base.styl'
 import { HashRouter } from 'react-router-dom'
 import { Provider } from 'mobx-react'
 import workIMStore from '@/stores/workIMStore.js'
+import { initWebsocket } from '@/websocket/index'
 
 const stores = {
   workIMStore
 }
+
+// websocket初始化
+// initWebsocket()
 
 ReactDOM.render(
   // <Provider workIMStore={workIMStore}>
