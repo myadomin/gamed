@@ -3,12 +3,24 @@ import { Avatar } from 'antd'
 import './index.styl'
 import { messageList, user } from '@/mock/imData'
 import dayjs from 'dayjs'
+import { sendWsMsg } from '@/websocket/func'
 
 export default class MessageList extends Component {
   constructor (props, context) {
     super(props)
     this.state = {
     }
+  }
+
+  componentDidMount () {
+    // wsSend({
+    //   rpcId: 'test',
+    //   data: null,
+    //   success: (res) => {
+    //     console.log('test1212----', res.data)
+    //   }
+    // })
+    sendWsMsg('test1', null)
   }
 
   render () {

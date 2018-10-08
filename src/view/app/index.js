@@ -5,6 +5,7 @@ import './index.styl'
 import GlobalHeader from './GlobalHeader'
 import WorkIM from '@/view/workIM'
 import Bill from '@/view/bill'
+import { initWebsocket } from '@/websocket/index'
 
 class App extends Component {
   constructor (props, context) {
@@ -12,6 +13,7 @@ class App extends Component {
     this.state = {
       current: ''
     }
+    initWebsocket()
   }
 
   render () {
