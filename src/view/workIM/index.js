@@ -6,7 +6,7 @@ import ChatterList from './ChatterList'
 import MessageList from './MessageList'
 import SubmitArea from './SubmitArea'
 import { inject, observer } from 'mobx-react'
-import { sendWsMsg } from '@/websocket/func'
+import { sendWsMsg } from '@/websocket/index'
 
 @inject('workIMStore')
 @observer
@@ -19,20 +19,6 @@ export default class workIM extends Component {
 
   componentDidMount () {
     sendWsMsg('getMessagesAndUsers', null)
-    // wsSend({
-    //   rpcId: 'getMessagesAndUsers',
-    //   data: null,
-    //   success: (res) => {
-    //     console.log('workIMStore----', res.data)
-    //   }
-    // })
-    // wsSend({
-    //   rpcId: 'test',
-    //   data: null,
-    //   success: (res) => {
-    //     // console.log('test----', res.data)
-    //   }
-    // })
   }
 
   render () {

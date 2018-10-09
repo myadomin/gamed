@@ -167,6 +167,3 @@ const messagesAndUsers = {
 }
 
 module.exports = messagesAndUsers
-// export {
-//   messagesAndUsers
-// }

@@ -6,14 +6,18 @@ import GlobalHeader from './GlobalHeader'
 import WorkIM from '@/view/workIM'
 import Bill from '@/view/bill'
 import { initWebsocket } from '@/websocket/index'
+import { inject, observer } from 'mobx-react'
+import DevTools from 'mobx-react-devtools'
 
+@inject('workIMStore')
+@observer
 class App extends Component {
   constructor (props, context) {
     super(props)
     this.state = {
       current: ''
     }
-    initWebsocket()
+    initWebsocket(this.props.workIMStore)
   }
 
   render () {
@@ -27,6 +31,7 @@ class App extends Component {
     // console.log(current)
     return (
       <Layout style={{ height: '100vh' }}>
+        <DevTools />
         <Sider
           breakpoint="lg"
           collapsedWidth="0"

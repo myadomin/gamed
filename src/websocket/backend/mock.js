@@ -9,18 +9,18 @@ const sendWsMsg = (rpcId, data) => {
 // 接收到websocket客户端的消息 根据rpcId返回相应数据
 wss.on('connection', (ws) => {
   this.ws = ws
-  setInterval(() => {
-    sendWsMsg('setIntervalData', 'setIntervalData')
-  }, 2000)
+  // setInterval(() => {
+  //   sendWsMsg('setIntervalData', 'setIntervalData')
+  // }, 2000)
   ws.on('message', (message) => {
     const json = JSON.parse(message)
     switch (json.rpcId) {
       case 'heartbeat':
-        return sendWsMsg('heartbeat', 'heartbeat: WebSocket is connectting')
+        return sendWsMsg('heartbeat', 'heartbeat: WebSocket is connectted')
       case 'getMessagesAndUsers':
         return sendWsMsg('getMessagesAndUsers', require('./messagesAndUsers'))
       case 'test':
-        return sendWsMsg('test1', 'test')
+        return sendWsMsg('test', 'test')
       default:
         console.log('服务端：没有找到此消息对应的rpcId')
     }
