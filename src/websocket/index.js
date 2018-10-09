@@ -1,16 +1,35 @@
-import * as func from './receiveDataToStore'
-
 let heartbeatTimer = null
 let createTimer = null
 let websocketStore = []
 
-const sendWsMsg = (rpcId, data) => {
+// 发送数据data到服务端 通过callBack接收服务端数据
+const sendWs = (rpcId, data, callBack) => {
   if (window.websocket.readyState === 1) {
     window.websocket.send(JSON.stringify({ rpcId: rpcId, data: data }))
   } else {
-    // 如果WebSocket还没连接上 先存入websocketStore
+    // 如果WebSocket还没连接上 先存入websocketStore 等到onopen再send
     websocketStore.push(JSON.stringify({ rpcId: rpcId, data: data }))
   }
+
+  // 如果有回调 就是需要回调拿服务端返回的数据
+  if (callBack) {
+    const handle = (e) => {
+      callBack(e.detail)
+      // 通过e.detail拿到数据后就移除事件
+      document.removeEventListener(rpcId, handle, false)
+    }
+    document.addEventListener(rpcId, handle, false)
+  }
+}
+
+// 接收服务端数据
+const recevieWs = (rpcId, callBack) => {
+  const handle = (e) => {
+    callBack(e.detail)
+  }
+  // 绑定事件前先移除事件
+  document.removeEventListener(rpcId, handle, false)
+  document.addEventListener(rpcId, handle, false)
 }
 
 const initWebsocket = (WorkIMStore) => {
@@ -27,7 +46,7 @@ const initWebsocket = (WorkIMStore) => {
     // 清空 避免重连再发送消息
     websocketStore = []
     heartbeatTimer = window.setInterval(() => {
-      sendWsMsg('heartbeat', new Date().getTime())
+      sendWs('heartbeat', new Date().getTime(), null)
     }, 10000)
   }
 
@@ -56,13 +75,15 @@ const initWebsocket = (WorkIMStore) => {
   window.websocket.onmessage = (evt) => {
     // 接收websocket服务端数据 分发到WorkIMStore里
     const json = JSON.parse(evt.data)
-    if (typeof func[json.rpcId] === 'function') {
-      func[json.rpcId](json.data, WorkIMStore)
-    }
+    // 自定义事件
+    const myEvent = new window.CustomEvent(json.rpcId, { detail: json.data })
+    // 触发事件 传数据json.data
+    document.dispatchEvent(myEvent)
   }
 }
 
 export {
   initWebsocket,
-  sendWsMsg
+  sendWs,
+  recevieWs
 }

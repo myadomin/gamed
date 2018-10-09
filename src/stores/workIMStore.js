@@ -1,8 +1,9 @@
-import { observable, action } from 'mobx'
+import { observable, action, computed } from 'mobx'
 
 export class WorkIMStore {
   @observable isShowDrawer = false
-  @observable messagesAndUsers = null
+  @observable messages = []
+  @observable users = {}
 
   @action showHiddenDrawer (isShowDrawer) {
     this.isShowDrawer = isShowDrawer

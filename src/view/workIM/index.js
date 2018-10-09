@@ -6,7 +6,7 @@ import ChatterList from './ChatterList'
 import MessageList from './MessageList'
 import SubmitArea from './SubmitArea'
 import { inject, observer } from 'mobx-react'
-import { sendWsMsg } from '@/websocket/index'
+import { sendWs } from '@/websocket/index'
 
 @inject('workIMStore')
 @observer
@@ -18,7 +18,9 @@ export default class workIM extends Component {
   }
 
   componentDidMount () {
-    sendWsMsg('getMessagesAndUsers', null)
+    sendWs('test', null, (data) => {
+      console.log(data)
+    })
   }
 
   render () {

@@ -1,7 +1,11 @@
 import React, { Component } from 'react'
 import { List, Avatar } from 'antd'
 import { messageList, user } from '@/mock/imData'
+import { inject, observer } from 'mobx-react'
+import { sendWs, recevieWs } from '@/websocket/index'
 
+@inject('workIMStore')
+@observer
 export default class ChatterList extends Component {
   constructor (props, context) {
     super(props)
@@ -10,7 +14,6 @@ export default class ChatterList extends Component {
       chartterList: []
     }
     this.handleOnClickChatter = this.handleOnClickChatter.bind(this)
-    this.getChartterList = this.getChartterList.bind(this)
   }
 
   handleOnClickChatter (id) {
@@ -18,40 +21,39 @@ export default class ChatterList extends Component {
   }
 
   componentDidMount () {
-    this.getChartterList(messageList)
+    sendWs('getMessagesAndUsers', null, (data) => {
+      console.log(data)
+    })
+    recevieWs('setIntervalData', (data) => {
+      console.log(data)
+    })
   }
 
-  getChartterList (messageList) {
-    let chartterList = []
-    messageList.forEach(obj => {
-      if (chartterList.indexOf(obj.threadId) === -1) {
-        chartterList.push(obj.threadId)
-      }
-    })
-    this.setState({ currentId: chartterList[0] })
-    this.state.chartterList = chartterList.map(item => user[item])
+  getChartterList () {
   }
 
   render () {
     const imgUrl = require('@/assets/11.jpg')
-    const { currentId, chartterList } = this.state
+    const chartterList = this.props.workIMStore.chartterList
+    const { currentId } = this.state
     return (
-      <List
-        itemLayout="horizontal"
-        dataSource={chartterList}
-        renderItem={item => (
-          <List.Item
-            style={{ padding: '12px 20px', cursor: 'default', borderBottom: '1px solid #e0e0e0' }}
-            className={ item.id === currentId ? 'chatters-active chatters' : 'chatters' }
-            onClick={() => this.handleOnClickChatter(item.id)}>
-            <List.Item.Meta
-              avatar={<Avatar shape="square" size={42} src={imgUrl} />}
-              title={<span style={{ fontSize: '14px' }}>{item.charName}</span>}
-              description={<span style={{ color: '#aaa', fontSize: '12px' }}>游戏服王霸天下</span>}
-            />
-          </List.Item>
-        )}
-      />
+      <div>1</div>
+      // <List
+      //   itemLayout="horizontal"
+      //   dataSource={chartterList}
+      //   renderItem={item => (
+      //     <List.Item
+      //       style={{ padding: '12px 20px', cursor: 'default', borderBottom: '1px solid #e0e0e0' }}
+      //       className={ item.id === currentId ? 'chatters-active chatters' : 'chatters' }
+      //       onClick={() => this.handleOnClickChatter(item.id)}>
+      //       <List.Item.Meta
+      //         avatar={<Avatar shape="square" size={42} src={imgUrl} />}
+      //         title={<span style={{ fontSize: '14px' }}>{item.charName}</span>}
+      //         description={<span style={{ color: '#aaa', fontSize: '12px' }}>游戏服王霸天下</span>}
+      //       />
+      //     </List.Item>
+      //   )}
+      // />
     )
   }
 }
