@@ -18,9 +18,9 @@ export default class workIM extends Component {
   }
 
   componentDidMount () {
-    sendWs('test', null, (data) => {
-      console.log(data)
-    })
+    // sendWs('test', null, (data) => {
+    //   console.log(data)
+    // })
   }
 
   render () {
