@@ -18,44 +18,51 @@ export default class workIM extends Component {
   }
 
   componentDidMount () {
-    // sendWs('test', null, (data) => {
-    //   console.log(data)
-    // })
+    sendWs('getMessagesAndUsers', null, (data) => {
+      const { workIMStore } = this.props
+      workIMStore.setMessages(data.messages)
+      workIMStore.setUsers(data.users)
+    })
   }
 
   render () {
     // 不能 { showHiddenDrawer } = this.props.workIMStore 找不到this
     const { workIMStore } = this.props
-    return (
-      <div className="workIM-wrap">
-        <div className="left">
-          <div className="leftTop">
-            <AddChatter />
-          </div>
-          <div className="leftBottom">
-            <div className="leftBottomWrap">
-              <ChatterList/>
+    // 必须等数据users messages形成再渲染页面
+    if (workIMStore.users && workIMStore.messages.length) {
+      return (
+        <div className="workIM-wrap">
+          <div className="left">
+            <div className="leftTop">
+              <AddChatter />
+            </div>
+            <div className="leftBottom">
+              <div className="leftBottomWrap">
+                <ChatterList/>
+              </div>
             </div>
           </div>
-        </div>
-        <div className="right">
-          <div className="rightTop">
-            <MessageList />
+          <div className="right">
+            <div className="rightTop">
+              <MessageList />
+            </div>
+            <div className="rightBottom">
+              <SubmitArea showDrawer={() => workIMStore.showHiddenDrawer(true)} />
+            </div>
           </div>
-          <div className="rightBottom">
-            <SubmitArea showDrawer={() => workIMStore.showHiddenDrawer(true)} />
-          </div>
+          <div style={{ clear: 'both' }}></div>
+          <Drawer
+            title="Create"
+            width={720}
+            placement="right"
+            onClose={() => workIMStore.showHiddenDrawer(false)}
+            visible={workIMStore.isShowDrawer}
+          >
+          </Drawer>
         </div>
-        <div style={{ clear: 'both' }}></div>
-        <Drawer
-          title="Create"
-          width={720}
-          placement="right"
-          onClose={() => workIMStore.showHiddenDrawer(false)}
-          visible={workIMStore.isShowDrawer}
-        >
-        </Drawer>
-      </div>
-    )
+      )
+    } else {
+      return ''
+    }
   }
 }

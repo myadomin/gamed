@@ -1,9 +1,11 @@
 import React, { Component } from 'react'
 import { Avatar } from 'antd'
 import './index.styl'
-import { messageList, user } from '@/mock/imData'
 import dayjs from 'dayjs'
+import { inject, observer } from 'mobx-react'
 
+@inject('workIMStore')
+@observer
 export default class MessageList extends Component {
   constructor (props, context) {
     super(props)
@@ -11,11 +13,9 @@ export default class MessageList extends Component {
     }
   }
 
-  componentDidMount () {
-  }
-
   render () {
     const imgUrl = require('@/assets/11.jpg')
+    const { workIMStore } = this.props
     // 普通文本消息
     const textMsg = (item, isLeftText) => (<div className={isLeftText ? 'leftAlign' : 'rightAlign'}>
       <Avatar shape="square" size={32} src={imgUrl} />
@@ -31,8 +31,8 @@ export default class MessageList extends Component {
       <Avatar shape="square" size={32} src={imgUrl} />
       <div className="rightDeliverReceiptItem">
         <ul>
-          <li>运营：{user[item.senderId].charName}</li>
-          <li>给玩家：{user[item.receiverId].charName}</li>
+          <li>运营：{workIMStore.users[item.senderId].charName}</li>
+          <li>给玩家：{workIMStore.users[item.receiverId].charName}</li>
           <li>发货：{item.deliverMsg.count / 1000}元</li>
         </ul>
         <p className="timestamp">{dayjs(item.timestamp).format('MM-DD: HH:mm:ss')}</p>
@@ -45,11 +45,11 @@ export default class MessageList extends Component {
       <Avatar shape="square" size={32} src={imgUrl} />
       <div className="leftDeliverReceiptItem">
         <ul>
-          <li>玩家：{user[item.senderId].charName}</li>
-          <li>向运营：{user[item.receiverId].charName}</li>
+          <li>玩家：{workIMStore.users[item.senderId].charName}</li>
+          <li>向运营：{workIMStore.users[item.receiverId].charName}</li>
           <li>请求回收：{item.receiptMsg.count / 1000}元</li>
           <li>{item.receiptMsg.alipay && '支付宝帐号：' + item.receiptMsg.alipay.account}</li>
-          <li>{item.receiptMsg.alipay && item.receiptMsg.alipay.username && '支付宝名称：' + item.receiptMsg.alipay.username}</li>
+          <li>{item.receiptMsg.alipay && item.receiptMsg.alipay.user && '支付宝名称：' + item.receiptMsg.alipay.user}</li>
           <li>{item.receiptMsg.wechat && '微信帐号：' + item.receiptMsg.wechat}</li>
         </ul>
         <p className="timestamp">{dayjs(item.timestamp).format('MM-DD: HH:mm:ss')}</p>
@@ -62,8 +62,8 @@ export default class MessageList extends Component {
       <Avatar shape="square" size={32} src={imgUrl} />
       <div className={isLeftSupple ? 'leftSuppleItem' : 'rightSuppleItem'}>
         <ul>
-          <li>管理员：{user[item.senderId].charName}</li>
-          <li>给运营：{user[item.receiverId].charName}</li>
+          <li>管理员：{workIMStore.users[item.senderId].charName}</li>
+          <li>给运营：{workIMStore.users[item.receiverId].charName}</li>
           <li>补货：{item.suppleMsg.count / 1000}元</li>
         </ul>
         <p className="timestamp">{dayjs(item.timestamp).format('MM-DD: HH:mm:ss')}</p>
@@ -96,7 +96,7 @@ export default class MessageList extends Component {
 
     return (
       <ul style={{ padding: '15px 20px' }}>
-        {messageList.map((item) => {
+        {workIMStore.users && workIMStore.currentMessages.map((item) => {
           return <li key={item.id}>
             {getMessageItem(item)}
           </li>
