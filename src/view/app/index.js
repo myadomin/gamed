@@ -17,6 +17,7 @@ class App extends Component {
     this.state = {
       current: ''
     }
+    // 初始化websocket
     initWebsocket(this.props.workIMStore)
   }
 
