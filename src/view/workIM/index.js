@@ -6,7 +6,7 @@ import ChatterList from './ChatterList'
 import MessageList from './MessageList'
 import SubmitArea from './SubmitArea'
 import { inject, observer } from 'mobx-react'
-import { sendWs } from '@/websocket/index'
+import { sendWs, recevieWs } from '@/websocket/index'
 
 @inject('workIMStore')
 @observer
@@ -18,10 +18,13 @@ export default class workIM extends Component {
   }
 
   componentDidMount () {
+    // 获取所有的message
     sendWs('getMessagesAndUsers', null, (data) => {
-      const { workIMStore } = this.props
-      workIMStore.setMessages(data.messages)
-      workIMStore.setUsers(data.users)
+      this.props.workIMStore.setMessagesAndUsers(data)
+    })
+    // 接收服务端推送过来的消息
+    recevieWs('receiveMessage', (data) => {
+      this.props.workIMStore.addMessagesAndUsers(data)
     })
   }
 

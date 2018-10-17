@@ -157,7 +157,7 @@ const users = {
     id: 3,
     avatar: 1,
     serverName: '游戏服王霸天下',
-    charName: '玩家天下第一'
+    charName: '玩家-id-3'
   }
 }
 

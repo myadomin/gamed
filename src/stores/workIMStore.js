@@ -28,12 +28,16 @@ export class WorkIMStore {
   @action showHiddenDrawer (isShowDrawer) {
     this.isShowDrawer = isShowDrawer
   }
-  @action setMessages (messages) {
-    this.messages = messages
-    this.setCurrentChatter(messages[0].threadId)
+  // 刷新进来设置messages users
+  @action setMessagesAndUsers (data) {
+    this.messages = data.messages
+    this.setCurrentChatter(this.messages[0].threadId)
+    this.users = data.users
   }
-  @action setUsers (users) {
-    this.users = users
+  // 接收一条服务器的消息
+  @action addMessagesAndUsers (data) {
+    this.messages.push(data.message)
+    Object.assign(this.users, data.user)
   }
   @action.bound setCurrentChatter (id) {
     this.currentChatter = id

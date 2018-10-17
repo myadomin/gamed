@@ -9,9 +9,12 @@ const sendWsMsg = (rpcId, data) => {
 // 接收到websocket客户端的消息 根据rpcId返回相应数据
 wss.on('connection', (ws) => {
   this.ws = ws
-  // setInterval(() => {
-  //   sendWsMsg('setIntervalData', 'setIntervalData')
-  // }, 2000)
+  setTimeout(() => {
+    sendWsMsg('receiveMessage', require('./receiveMessage')[0])
+  }, 3000)
+  setTimeout(() => {
+    sendWsMsg('receiveMessage', require('./receiveMessage')[1])
+  }, 5000)
   ws.on('message', (message) => {
     const json = JSON.parse(message)
     switch (json.rpcId) {
