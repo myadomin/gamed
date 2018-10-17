@@ -91,23 +91,23 @@ const messages = [
     },
     timestamp: 1537280417091
   },
-  {
-    id: 41,
-    localId: '某个唯一值',
-    threadId: 2,
-    senderId: 1,
-    receiverId: 2,
-    status: 1,
-    type: 4,
-    // 补货是由管理员发送给运营人员 所以senderId一定是管理员
-    // 这条消息中senderId是当前用户(管理员) receiverId是对方(运营) 所以消息排列在右边
-    // 我管理员给运营xxx补货xxx
-    suppleMsg: {
-      type: 'money', // 'money'
-      count: 100000 // 单位是厘，显示为元除以1000
-    },
-    timestamp: 1537280417091
-  },
+  // {
+  //   id: 41,
+  //   localId: '某个唯一值',
+  //   threadId: 2,
+  //   senderId: 1,
+  //   receiverId: 2,
+  //   status: 1,
+  //   type: 4,
+  //   // 补货是由管理员发送给运营人员 所以senderId一定是管理员
+  //   // 这条消息中senderId是当前用户(管理员) receiverId是对方(运营) 所以消息排列在右边
+  //   // 我管理员给运营xxx补货xxx
+  //   suppleMsg: {
+  //     type: 'money', // 'money'
+  //     count: 100000 // 单位是厘，显示为元除以1000
+  //   },
+  //   timestamp: 1537280417091
+  // },
   {
     id: 42,
     localId: '某个唯一值',

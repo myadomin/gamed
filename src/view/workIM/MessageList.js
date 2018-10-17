@@ -71,20 +71,24 @@ export default class MessageList extends Component {
       </div>
     </div>)
 
+    // 当前用户只有两种身份 1运营 2管理员
     const getMessageItem = (item) => {
       switch (item.type) {
         case 1:
-          // 文本消息 如果item.senderId === item.threadId 说明senderId是对方 receiverId是当前用户 所以文本消息排列在左边
+          // 文本消息 无论任何身份 都可以互相发
           const isLeftText = item.senderId === item.threadId
           return textMsg(item, isLeftText)
         case 2:
-          // 发货消息 运营发钱对应的元宝给玩家 senderId一定是当前用户(运营) receiverId一定是对方(玩家) 排列在右边
+          // 发货消息 运营发钱对应的元宝给玩家
+          // 当前用户只能是运营 运营是发送者(senderId) 排列在右边
           return deliverMsg(item)
         case 3:
-          // 回收消息 玩家发钱对应的元宝给运营回收 senderId一定是对方(玩家) receiverId一定是当前用户(运营) 排列在左边
+          // 回收消息 玩家发钱对应的元宝给运营回收
+          // 当前用户只能是运营 运营是接受者(receiverId) 排列在左边
           return receiptMsg(item)
         case 4:
-          // senderId一定是管理员 如果item.senderId === item.threadId 消息排列在左边
+          // 当前用户是运营 运营只能是接收者(receiverId) 排列在左边
+          // 当前用户是管理员 管理员只能是发送者(senderId) 排列在右边
           const isLeftSupple = item.senderId === item.threadId
           return SuppleMsg(item, isLeftSupple)
         case 99:
@@ -96,7 +100,7 @@ export default class MessageList extends Component {
 
     return (
       <ul style={{ padding: '15px 20px' }}>
-        {workIMStore.currentMessages.map((item) => {
+        {workIMStore.currentMessages.map(item => {
           return <li key={item.id}>
             {getMessageItem(item)}
           </li>

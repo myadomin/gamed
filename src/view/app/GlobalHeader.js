@@ -33,7 +33,7 @@ const GlobalHeader = () => {
             textOverflow: 'ellipsis',
             display: 'inline-block',
             float: 'left'
-          }}>我是大神啊</span>
+          }}>老子是运营</span>
           <Icon type="down" style={{
             float: 'left',
             margin: '26px 0 0 3px'
