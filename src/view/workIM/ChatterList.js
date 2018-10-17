@@ -7,14 +7,9 @@ import { inject, observer } from 'mobx-react'
 export default class ChatterList extends Component {
   constructor (props, context) {
     super(props)
-    this.state = {
-      id: 1
-    }
-    // this.handleOnClickChatter = this.handleOnClickChatter.bind(this)
   }
 
   handleOnClickChatter (id) {
-    // this.setState({id: id + 1})
     const { workIMStore } = this.props
     workIMStore.setCurrentChatter(id)
   }

@@ -96,7 +96,7 @@ export default class MessageList extends Component {
 
     return (
       <ul style={{ padding: '15px 20px' }}>
-        {workIMStore.users && workIMStore.currentMessages.map((item) => {
+        {workIMStore.currentMessages.map((item) => {
           return <li key={item.id}>
             {getMessageItem(item)}
           </li>

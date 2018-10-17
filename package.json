@@ -4,7 +4,7 @@
   "description": "adomin",
   "private": true,
   "scripts": {
-    "start": "cross-env PROXY_ENV=dev NODE_ENV=dev webpack-dev-server --hot --config ./scripts/webpack.dev.config.js",
+    "start": "npm run dev",
     "dev": "cross-env PROXY_ENV=dev NODE_ENV=dev webpack-dev-server --config ./scripts/webpack.dev.config.js",
     "build": "rimraf dist && webpack --config ./scripts/webpack.prod.config.js",
     "ws": "nodemon ./src/websocket/backend/mock.js"
