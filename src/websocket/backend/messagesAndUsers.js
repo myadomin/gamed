@@ -11,7 +11,7 @@ const messages = [
     senderId: 3,
     // 接受者
     receiverId: 2,
-    // 1: 发送中 2: 成功 3：余额不足 4: 玩家不在线
+    // 1: 发送中 2: 成功 3:失败 4余额不足 5:玩家不在线
     // 99: 处理超时 需要根据时间戳timestamp对比是否发送超时，如果超时手动重试，重新发送不要改动localId
     status: 2,
     // 1: 文本消息 2: 发货消息 3: 回收消息 4: 补货消息 99: 空消息(用于添加某个玩家到对话列表)
@@ -42,7 +42,7 @@ const messages = [
     threadId: 3,
     senderId: 2,
     receiverId: 3,
-    status: 2,
+    status: 4,
     // 这条文本消息中senderId是当前用户 receiverId是对方 所以消息排列在右边
     type: 1,
     textMsg: '我发给对方的文本',
@@ -54,10 +54,22 @@ const messages = [
     threadId: 3,
     senderId: 3,
     receiverId: 2,
-    status: 2,
+    status: 5,
     // 这条文本消息中senderId是对方 receiverId是当前用户 所以消息排列在左边
     type: 1,
     textMsg: '对方发给我的文本',
+    timestamp: 1537280417091
+  },
+  {
+    id: 14,
+    localId: '某个唯一值',
+    threadId: 3,
+    senderId: 2,
+    receiverId: 3,
+    status: 2,
+    // 这条文本消息中senderId是当前用户 receiverId是对方 所以消息排列在右边
+    type: 1,
+    textMsg: '待重发的消息',
     timestamp: 1537280417091
   },
   {
@@ -123,18 +135,18 @@ const messages = [
       count: 100000 // 单位是厘，显示为元除以1000
     },
     timestamp: 1537280417091
-  },
-  {
-    id: 91,
-    localId: '某个唯一值',
-    threadId: 3,
-    senderId: 2,
-    receiverId: 3,
-    status: 2,
-    // 空消息
-    type: 99,
-    timestamp: 1537280417091
   }
+  // {
+  //   id: 91,
+  //   localId: '某个唯一值',
+  //   threadId: 3,
+  //   senderId: 2,
+  //   receiverId: 3,
+  //   status: 2,
+  //   // 空消息
+  //   type: 99,
+  //   timestamp: 1537280417091
+  // }
 ]
 
 const users = {

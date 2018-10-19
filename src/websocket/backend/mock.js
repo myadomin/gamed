@@ -12,7 +12,9 @@ const sendMessageData = (data) => {
   data.message.id = now
   data.message.timestamp = now
   // 消息发送状态成功
-  data.message.status = 2
+  // data.message.status = 2
+  // 存储超时，返回发送状态失败
+  data.message.status = 3
   return data
 }
 
