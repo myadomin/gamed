@@ -1,6 +1,8 @@
 import { observable, action, computed } from 'mobx'
 
 export class WorkIMStore {
+  // 当前用户 todo:登录后存入localstorage然后拿 现在假设是2 运营
+  @observable currentUser = 2
   // 抽屉是否打开
   @observable isShowDrawer = false
   // 所有消息
@@ -34,10 +36,19 @@ export class WorkIMStore {
     this.setCurrentChatter(this.messages[0].threadId)
     this.users = data.users
   }
-  // 接收一条服务器的消息
+  // 添加一条消息
   @action addMessagesAndUsers (data) {
     this.messages.push(data.message)
-    Object.assign(this.users, data.user)
+    Object.assign(this.users, data.user || {})
+  }
+  // 修改localId对应的那条消息
+  @action updateMessagesAndUsers (localId, data) {
+    this.messages.forEach(item => {
+      if (item.localId === localId) {
+        Object.assign(item, data.message)
+      }
+    })
+    console.log(111, this.messages)
   }
   @action.bound setCurrentChatter (id) {
     this.currentChatter = id

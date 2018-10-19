@@ -1,4 +1,4 @@
-const receiveMessag = [
+const receiveMessage = [
   {
     // 3->2（当前用户运营）
     message: {
@@ -45,4 +45,4 @@ const receiveMessag = [
   }
 ]
 
-module.exports = receiveMessag
+module.exports = receiveMessage

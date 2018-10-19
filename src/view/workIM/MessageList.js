@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { Avatar } from 'antd'
+import { Avatar, Icon } from 'antd'
 import './index.styl'
 import dayjs from 'dayjs'
 import { inject, observer } from 'mobx-react'
@@ -24,6 +24,7 @@ export default class MessageList extends Component {
         <p className="timestamp">{dayjs(item.timestamp).format('MM-DD: HH:mm:ss')}</p>
         <span className={isLeftText ? 'leftTextArrow' : 'rightTextArrow'}></span>
       </div>
+      {item.status === 1 && <Icon className="loading" type="loading-3-quarters" spin />}
     </div>)
 
     // 运营发货给玩家
