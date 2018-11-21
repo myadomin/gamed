@@ -40,6 +40,7 @@ export default class SubmitArea extends Component {
     }
     // 发送消息(正在发送) 先存入store在本地显示
     workIMStore.addMessagesAndUsers(data)
+    this.setState({ textMsg: '' })
     sendWs('sendMessage', data, (data) => {
       // 存入后台后 发送消息(成功) 修改了message的id timestamp status ，通过localId找到store里的这条消息修改它
       workIMStore.updateMessagesAndUsers(data.message.localId, data)

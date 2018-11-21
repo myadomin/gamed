@@ -98,7 +98,7 @@ export default class MessageList extends Component {
         // 成功
         return null
       } else if (status === 3) {
-        // 失败 todo 可以重新发
+        // 失败 可以重新发
         return <Tooltip placement="top" title={'发送失败, 点击重发消息'}>
           <Icon type="exclamation-circle" theme="outlined" onClick={() => sendMessageAgain(item)} />
         </Tooltip>

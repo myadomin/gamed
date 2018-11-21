@@ -36,11 +36,11 @@ wss.on('connection', (ws) => {
       switch (json.rpcId) {
         case 'heartbeat':
           return sendWsMsg('heartbeat', 'heartbeat: WebSocket is connectted')
-        case 'getMessagesAndUsers':
-        // 刷新进入页面加载所有message
-          return sendWsMsg('getMessagesAndUsers', require('./messagesAndUsers'))
+        case 'getMessagesAndUsersAndServerList':
+          // 刷新进入页面加载所有message
+          return sendWsMsg('getMessagesAndUsersAndServerList', require('./messagesAndUsersAndServerList'))
         case 'sendMessage':
-        // 客户端发送message到服务端
+          // 客户端发送message到服务端
           return sendWsMsg('sendMessage', sendMessageData(json.data))
         default:
           console.log('服务端：没有找到此消息对应的rpcId')

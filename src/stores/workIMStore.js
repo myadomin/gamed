@@ -9,6 +9,8 @@ export class WorkIMStore {
   @observable messages = []
   // 消息所属用户
   @observable users = null
+  // 服务器列表
+  @observable serverList = []
   // 当前对话者id
   @observable currentChatter = null
 
@@ -31,10 +33,11 @@ export class WorkIMStore {
     this.isShowDrawer = isShowDrawer
   }
   // 刷新进来设置messages users
-  @action setMessagesAndUsers (data) {
+  @action setMessagesAndUsersAndServerList (data) {
     this.messages = data.messages
     this.setCurrentChatter(this.messages[0].threadId)
     this.users = data.users
+    this.serverList = data.serverList
   }
   // 添加一条消息
   @action addMessagesAndUsers (data) {

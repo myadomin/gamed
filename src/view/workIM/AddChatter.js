@@ -9,8 +9,6 @@ export default class AddChatter extends Component {
   constructor (props, context) {
     super(props)
     this.state = {
-      // 服务器列表
-      serverOptions: [],
       // 用户列表
       userOptions: [],
       // 选中的服务器
@@ -21,14 +19,6 @@ export default class AddChatter extends Component {
   }
 
   componentDidMount () {
-    // 服务器列表 等待mock
-    const mockServerList = [
-      { value: 1, text: '王霸服1' },
-      { value: 2, text: '王霸服2' },
-      { value: 3, text: '王霸服3' },
-      { value: 4, text: '王霸服4' }
-    ]
-    this.setState({ serverOptions: mockServerList })
   }
 
   render () {
@@ -84,7 +74,7 @@ export default class AddChatter extends Component {
           [userIdNumber]: {
             id: userIdNumber,
             avatar: 1,
-            serverName: findTextByValue(this.state.serverOptions, serverId),
+            serverName: findTextByValue(workIMStore.serverList, serverId),
             charName: findTextByValue(this.state.userOptions, userId)
           }
         }
@@ -92,6 +82,7 @@ export default class AddChatter extends Component {
       // 发送消息(正在发送) 先存入store在本地显示
       workIMStore.addMessagesAndUsers(data)
       // 选中刚被添加的用户
+      // todo 用户id是否是唯一？ 会不会出现服务器1及服务器2都有userId是1
       workIMStore.setCurrentChatter(userIdNumber)
       sendWs('sendMessage', data, (data) => {
         // 发送后台 修改了message的id timestamp status ，通过localId找到store里的这条消息修改它
@@ -118,7 +109,7 @@ export default class AddChatter extends Component {
           style={{ margin: '0 0 10px 0', width: '100%' }}
           onChange={selectServer}
         >
-          {this.state.serverOptions.map(d => <Select.Option key={d.value}>{d.text}</Select.Option>)}
+          {this.props.workIMStore.serverList.map(d => <Select.Option key={d.value}>{d.text}</Select.Option>)}
         </Select>
         <Select
           placeholder="请搜索玩家"

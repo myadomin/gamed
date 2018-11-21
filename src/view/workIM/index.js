@@ -19,8 +19,8 @@ export default class workIM extends Component {
 
   componentDidMount () {
     // 获取所有的message
-    sendWs('getMessagesAndUsers', null, (data) => {
-      this.props.workIMStore.setMessagesAndUsers(data)
+    sendWs('getMessagesAndUsersAndServerList', null, (data) => {
+      this.props.workIMStore.setMessagesAndUsersAndServerList(data)
     })
     // 接收服务端推送过来的消息
     recevieWs('receiveMessage', (data) => {
