@@ -46,7 +46,7 @@ export default class workIM extends Component {
             </div>
           </div>
           <div className="right">
-            <div className="rightTop">
+            <div className="rightTop" id="rightTop">
               <MessageList />
             </div>
             <div className="rightBottom">

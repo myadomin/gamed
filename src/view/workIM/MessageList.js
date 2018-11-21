@@ -14,6 +14,24 @@ export default class MessageList extends Component {
     }
   }
 
+  // 首次加载这个组件的时候触发
+  componentDidMount () {
+    this.scrollToBottom()
+  }
+
+  // 切换chatter或者添加消息等改变messageList的行为触发这个方法
+  componentWillUpdate () {
+    this.scrollToBottom()
+  }
+
+  // messageList滚动到最底部
+  scrollToBottom () {
+    // todo 没有vue nextTick
+    setTimeout(() => {
+      document.getElementById('rightTop').scrollTop = document.getElementById('rightTop').scrollHeight
+    }, 1)
+  }
+
   render () {
     const imgUrl = require('@/assets/11.jpg')
     const { workIMStore } = this.props

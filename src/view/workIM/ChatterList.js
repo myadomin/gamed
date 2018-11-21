@@ -20,7 +20,7 @@ export default class ChatterList extends Component {
     const imgUrl = require('@/assets/11.jpg')
     const { workIMStore } = this.props
     // List组件有BUG 必须console.log(workIMStore.currentChatter)才能触发workIMStore.currentChatter class更新
-    console.log(1111, workIMStore.currentChatter)
+    console.log(workIMStore.currentChatter)
     return (
       <div>
         <List
