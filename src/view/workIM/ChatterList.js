@@ -9,9 +9,11 @@ export default class ChatterList extends Component {
     super(props)
   }
 
-  handleOnClickChatter (id) {
+  handleOnClickChatter (item) {
     const { workIMStore } = this.props
-    workIMStore.setCurrentChatter(id)
+    workIMStore.setCurrentChatter(item.id)
+    // workIMStore.setDeliverRadioMoney(100)
+    // workIMStore.setDeliverMoney(100)
   }
 
   render () {
@@ -28,7 +30,7 @@ export default class ChatterList extends Component {
             <List.Item
               style={{ padding: '12px 20px', cursor: 'default', borderBottom: '1px solid #e0e0e0' }}
               className={ item.id === workIMStore.currentChatter ? 'chatters-active chatters' : 'chatters' }
-              onClick={() => this.handleOnClickChatter(item.id)}
+              onClick={() => this.handleOnClickChatter(item)}
             >
               <List.Item.Meta
                 avatar={<Avatar shape="square" size={42} src={imgUrl} />}

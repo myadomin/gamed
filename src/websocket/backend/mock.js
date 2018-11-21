@@ -23,12 +23,12 @@ wss.on('connection', (ws) => {
   this.ws = ws
 
   // 服务端推送到客户端
-  // setTimeout(() => {
-  //   sendWsMsg('receiveMessage', require('./receiveMessage')[0])
-  // }, 3000)
-  // setTimeout(() => {
-  //   sendWsMsg('receiveMessage', require('./receiveMessage')[1])
-  // }, 5000)
+  setTimeout(() => {
+    sendWsMsg('receiveMessage', require('./receiveMessage')[0])
+  }, 3000)
+  setTimeout(() => {
+    sendWsMsg('receiveMessage', require('./receiveMessage')[1])
+  }, 5000)
 
   ws.on('message', (message) => {
     setTimeout(() => {

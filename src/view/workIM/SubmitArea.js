@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { Tabs, Button, Input, Row, Col, Form, Icon, Rate, Radio } from 'antd'
+import { Tabs, Button, Input, Row, Col, Form, Icon, message, Radio } from 'antd'
 import { inject, observer } from 'mobx-react'
 import { sendWs } from '@/websocket/index'
 
@@ -14,16 +14,16 @@ export default class SubmitArea extends Component {
     }
   }
 
+  // 输入文字消息
   inputTextMsg (textMsg) {
     this.setState({ textMsg })
   }
 
+  // 发送文字消息
   sendMessage () {
     const { workIMStore } = this.props
     const localId = new Date().getTime()
-    // 如果是和已在对话列表的人发消息 本地store就有users
-    // 如果添加一个人和他对话 下拉这个人选择后 存这个人到store的user里
-    // 所以在sendMessage的时候就不需要带上users字段
+    // 如果是和已在对话列表的人发消息 本地store users里就有这个user 所以这里data不需要user
     const data = {
       message: {
         // 先id设为只一个唯一数用于messageList渲染 之后后台会返回真正的id
@@ -47,15 +47,59 @@ export default class SubmitArea extends Component {
     })
   }
 
+  // tab切换
   tabChange (tabKey) {
     this.setState({ tabKey })
   }
 
+  // 输入发货金额
+  inputMoney (money) {
+    this.props.workIMStore.setDeliverMoney(money)
+  }
+
+  // 快选发货金额
+  changeRadioMoney (radioMoney) {
+    this.props.workIMStore.setDeliverRadioMoney(radioMoney)
+    this.props.workIMStore.setDeliverMoney(radioMoney)
+  }
+
+  // 发货
+  sendDeliverMsg () {
+    const { workIMStore } = this.props
+    const localId = new Date().getTime()
+    if (!workIMStore.deliverMoney) {
+      return message.warning('请填写发货金额')
+    }
+    const data = {
+      message: {
+        id: localId,
+        localId: localId,
+        threadId: workIMStore.currentChatter,
+        senderId: workIMStore.currentUser,
+        receiverId: workIMStore.currentChatter,
+        status: 1,
+        type: 2,
+        deliverMsg: {
+          type: 'money',
+          count: workIMStore.deliverMoney * 1000 // 单位是厘，显示为元除以1000
+        }
+      }
+    }
+    // 发送消息(正在发送) 先存入store在本地显示
+    workIMStore.addMessagesAndUsers(data)
+    workIMStore.setDeliverMoney('')
+    sendWs('sendMessage', data, (data) => {
+      // 存入后台后 发送消息(成功) 修改了message的id timestamp status ，通过localId找到store里的这条消息修改它
+      workIMStore.updateMessagesAndUsers(data.message.localId, data)
+    })
+  }
+
   render () {
-    const count = 54321
+    const countRate = 100
     const type = '元宝'
     const { tabKey, textMsg } = this.state
-    const { showDrawer } = this.props
+    const { showDrawer, workIMStore } = this.props
+    const currentChatterObj = workIMStore.users[workIMStore.currentChatter]
     return (
       <div style={{ padding: '0 10px' }}>
         <div className="submitTabs">
@@ -83,7 +127,7 @@ export default class SubmitArea extends Component {
                 <Row gutter={24}>
                   <Col span={24}>
                     <Form.Item label="快选金额" labelCol={{span: 4}}>
-                      <Radio.Group value={100}>
+                      <Radio.Group value={workIMStore.deliverRadioMoney} onChange={(ev) => this.changeRadioMoney(ev.target.value)}>
                         <Radio value={50}>50</Radio>
                         <Radio value={100}>100</Radio>
                         <Radio value={200}>200</Radio>
@@ -100,17 +144,20 @@ export default class SubmitArea extends Component {
                 <Row gutter={24}>
                   <Col span={16}>
                     <Form.Item label="发送金额" labelCol={{span: 6}}>
-                      <Input placeholder="请输入发送金额" addonAfter={`${count}个${type}`} />
+                      <Input placeholder="请输入发送金额"
+                        value={workIMStore.deliverMoney}
+                        onChange={(ev) => this.inputMoney(ev.target.value)}
+                        addonAfter={`${workIMStore.deliverMoney * countRate}个${type}`} />
                       <div style={{ color: '#888' }}>
-                        发送给玩家 <span>天下第一</span>
-                        (<span>王霸天下</span>)
+                        发送给玩家 <span>{currentChatterObj.charName}</span>
+                        (<span>{currentChatterObj.serverName}</span>)
                       </div>
                     </Form.Item>
                   </Col>
                 </Row>
               </Form>
               <div>
-                <Button type="primary" style={{ float: 'right' }}>发货</Button>
+                <Button type="primary" style={{ float: 'right' }} onClick={this.sendDeliverMsg.bind(this)}>发货</Button>
               </div>
             </Tabs.TabPane>
           </Tabs>

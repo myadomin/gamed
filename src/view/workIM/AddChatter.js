@@ -59,6 +59,7 @@ export default class AddChatter extends Component {
       const { workIMStore } = this.props
       const localId = new Date().getTime()
       const userIdNumber = Number(userId)
+      // 添加一个人和他对话 下拉选择这个人后 data里要加上这个user 后续存入store users
       const data = {
         message: {
           id: localId,

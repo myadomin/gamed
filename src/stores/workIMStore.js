@@ -13,6 +13,9 @@ export class WorkIMStore {
   @observable serverList = []
   // 当前对话者id
   @observable currentChatter = null
+  // 发货表单 钱
+  @observable deliverMoney = 100
+  @observable deliverRadioMoney = 100
 
   // 对话列表
   @computed get chartterList () {
@@ -52,8 +55,15 @@ export class WorkIMStore {
       }
     })
   }
+  // 当前对话者
   @action.bound setCurrentChatter (id) {
     this.currentChatter = id
+  }
+  @action setDeliverMoney (money) {
+    this.deliverMoney = money
+  }
+  @action setDeliverRadioMoney (money) {
+    this.deliverRadioMoney = money
   }
 }
 
