@@ -34,9 +34,7 @@ export default class AddChatter extends Component {
   render () {
     // 选择某个服务器后
     const selectServer = (value) => {
-      this.setState({
-        serverValue: value
-      })
+      this.setState({ serverValue: value })
     }
     // 用户列表 等到mock
     const mockUserList = [
@@ -50,9 +48,7 @@ export default class AddChatter extends Component {
     }
     // 选择某个用户后
     const selectUser = (value) => {
-      this.setState({
-        userValue: value
-      })
+      this.setState({ userValue: value })
     }
 
     // 添加一个用户到用户列表
@@ -64,6 +60,8 @@ export default class AddChatter extends Component {
         return message.warning('请选择玩家')
       }
       sendMessageByNewChartter(this.state.serverValue, this.state.userValue)
+      this.setState({ serverValue: undefined })
+      this.setState({ userValue: undefined })
     }
 
     // 新添加的用户 发送一条你好消息
@@ -115,7 +113,11 @@ export default class AddChatter extends Component {
 
     return (
       <div style={{ padding: '10px' }}>
-        <Select placeholder="请选择服务器" style={{ margin: '0 0 10px 0', width: '100%' }} onChange={selectServer} >
+        <Select placeholder="请选择服务器"
+          value={this.state.serverValue}
+          style={{ margin: '0 0 10px 0', width: '100%' }}
+          onChange={selectServer}
+        >
           {this.state.serverOptions.map(d => <Select.Option key={d.value}>{d.text}</Select.Option>)}
         </Select>
         <Select
