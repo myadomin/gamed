@@ -33,7 +33,7 @@ export default class ChatterList extends Component {
               <List.Item.Meta
                 avatar={<Avatar shape="square" size={42} src={imgUrl} />}
                 title={<span style={{ fontSize: '14px' }}>{item.charName}</span>}
-                description={<span style={{ color: '#aaa', fontSize: '12px' }}>游戏服王霸天下</span>}
+                description={<span style={{ color: '#aaa', fontSize: '12px' }}>{item.serverName}</span>}
               />
             </List.Item>
           )}

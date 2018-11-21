@@ -154,21 +154,21 @@ const users = {
   1: {
     id: 1,
     avatar: 1,
-    serverName: '游戏服王霸天下',
+    serverName: '游戏服王霸天下1',
     charName: '老子是管理员'
   },
   // 运营
   2: {
     id: 2,
     avatar: 1,
-    serverName: '游戏服王霸天下',
+    serverName: '游戏服王霸天下2',
     charName: '老子是运营'
   },
   // 玩家
   3: {
     id: 3,
     avatar: 1,
-    serverName: '游戏服王霸天下',
+    serverName: '游戏服王霸天下3',
     charName: '玩家-id-3'
   }
 }

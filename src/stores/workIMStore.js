@@ -48,7 +48,6 @@ export class WorkIMStore {
         Object.assign(item, data.message)
       }
     })
-    console.log(111, this.messages)
   }
   @action.bound setCurrentChatter (id) {
     this.currentChatter = id
