@@ -16,6 +16,7 @@ const messages = [
     status: 2,
     // 1: 文本消息 2: 发货消息 3: 回收消息 4: 补货消息 99: 空消息(用于添加某个玩家到对话列表)
     type: 1,
+    isRead: true,
     textMsg: '此条用于说明字段意思',
     // 2: 发货消息 运营发钱对应的元宝给玩家
     // deliverMsg: {
@@ -44,6 +45,7 @@ const messages = [
     status: 4,
     // 这条文本消息中senderId是当前用户 receiverId是对方 所以消息排列在右边
     type: 1,
+    isRead: true,
     textMsg: '我发给对方的文本',
     timestamp: 1537280417091
   },
@@ -56,6 +58,7 @@ const messages = [
     status: 5,
     // 这条文本消息中senderId是对方 receiverId是当前用户 所以消息排列在左边
     type: 1,
+    isRead: true,
     textMsg: '对方发给我的文本',
     timestamp: 1537280417091
   },
@@ -68,6 +71,7 @@ const messages = [
     status: 2,
     // 这条文本消息中senderId是当前用户 receiverId是对方 所以消息排列在右边
     type: 1,
+    isRead: false,
     textMsg: '待重发的消息',
     timestamp: 1537280417091
   },
@@ -79,6 +83,7 @@ const messages = [
     receiverId: 3,
     status: 2,
     type: 2,
+    isRead: true,
     // 发货消息 运营发钱对应的元宝给玩家 senderId一定是当前用户(运营) receiverId一定是对方(玩家) 排列在右边
     deliverMsg: {
       type: 'money', // 'money'
@@ -94,6 +99,7 @@ const messages = [
     receiverId: 2,
     status: 2,
     type: 3,
+    isRead: true,
     // 回收消息 玩家发钱对应的元宝给运营回收 senderId一定是对方(玩家) receiverId一定是当前用户(运营) 排列在左边
     receiptMsg: {
       count: 143590,
@@ -110,6 +116,7 @@ const messages = [
   //   receiverId: 2,
   //   status: 2,
   //   type: 4,
+  //   isRead: true,
   //   // 补货是由管理员发送给运营人员 所以senderId一定是管理员
   //   // 这条消息中senderId是当前用户(管理员) receiverId是对方(运营) 所以消息排列在右边
   //   // 我管理员给运营xxx补货xxx
@@ -127,6 +134,7 @@ const messages = [
     receiverId: 2,
     status: 2,
     type: 4,
+    isRead: true,
     // 这条消息中senderId是对方(管理员) receiverId是当前用户(运营) 所以消息排列在左边
     // 我运营收到管理员xxx的补货xxx
     suppleMsg: {

@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { List, Avatar, Button } from 'antd'
+import { List, Avatar, Button, Badge } from 'antd'
 import { inject, observer } from 'mobx-react'
 
 @inject('workIMStore')
@@ -12,8 +12,8 @@ export default class ChatterList extends Component {
   handleOnClickChatter (item) {
     const { workIMStore } = this.props
     workIMStore.setCurrentChatter(item.id)
-    // workIMStore.setDeliverRadioMoney(100)
-    // workIMStore.setDeliverMoney(100)
+    workIMStore.setDeliverMoney('')
+    workIMStore.setDeliverRadioMoney(100)
   }
 
   render () {
@@ -34,7 +34,10 @@ export default class ChatterList extends Component {
             >
               <List.Item.Meta
                 avatar={<Avatar shape="square" size={42} src={imgUrl} />}
-                title={<span style={{ fontSize: '14px' }}>{item.charName}</span>}
+                title={<div>
+                  <span style={{ fontSize: '14px' }}>{item.charName}</span>
+                  <span style={{ float: 'right' }}><Badge count={item.unReadNum}></Badge></span>
+                </div>}
                 description={<span style={{ color: '#aaa', fontSize: '12px' }}>{item.serverName}</span>}
               />
             </List.Item>

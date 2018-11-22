@@ -14,7 +14,7 @@ export class WorkIMStore {
   // 当前对话者id
   @observable currentChatter = null
   // 发货表单 钱
-  @observable deliverMoney = 100
+  @observable deliverMoney = ''
   @observable deliverRadioMoney = 100
 
   // 对话列表
@@ -25,7 +25,13 @@ export class WorkIMStore {
         chartterListIds.push(obj.threadId)
       }
     })
-    return chartterListIds.map(item => this.users[item])
+    return chartterListIds.map(id => {
+      // 在所有消息中筛选当前threadId是id的message 然后再筛选这些message里isRead是false的消息
+      this.users[id].unReadNum = this.messages
+        .filter(obj => obj.threadId === id)
+        .filter(obj => obj.isRead === false).length
+      return this.users[id]
+    })
   }
   // 当前消息列表
   @computed get currentMessages () {
