@@ -10,7 +10,7 @@ const receiveMessage = [
       status: 2,
       type: 1,
       isRead: false,
-      textMsg: '玩家-id-3发给我的文本',
+      textMsg: '玩家-id-3发给我的文本1',
       timestamp: 1537280417091
     },
     user: {
@@ -65,6 +65,29 @@ const receiveMessage = [
         avatar: 1,
         serverName: '游戏服abc',
         charName: '玩家-id-4'
+      }
+    }
+  },
+  {
+    // 3->2（当前用户运营）
+    message: {
+      id: 116,
+      localId: '某个唯一值',
+      threadId: 3,
+      senderId: 3,
+      receiverId: 2,
+      status: 2,
+      type: 1,
+      isRead: false,
+      textMsg: '玩家-id-3发给我的文本2',
+      timestamp: 1537280417091
+    },
+    user: {
+      3: {
+        id: 3,
+        avatar: 1,
+        serverName: '游戏服王霸天下',
+        charName: '玩家-id-3'
       }
     }
   }

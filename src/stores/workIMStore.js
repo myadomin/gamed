@@ -1,4 +1,4 @@
-import { observable, action, computed } from 'mobx'
+import { observable, action, computed, autorun } from 'mobx'
 
 export class WorkIMStore {
   // 当前用户 todo:登录后存入localstorage然后拿 现在假设是2 运营
@@ -17,6 +17,11 @@ export class WorkIMStore {
   @observable deliverMoney = ''
   @observable deliverRadioMoney = 100
 
+  // constructor () {
+  //   autorun(() => {
+  //   })
+  // }
+
   // 对话列表
   @computed get chartterList () {
     let chartterListIds = []
@@ -26,7 +31,8 @@ export class WorkIMStore {
       }
     })
     return chartterListIds.map(id => {
-      // 在所有消息中筛选当前threadId是id的message 然后再筛选这些message里isRead是false的消息
+      // 每条对话的未读消息数量
+      // 在所有消息中筛选当前对话message 然后再筛选这些message里isRead是false的消息
       this.users[id].unReadNum = this.messages
         .filter(obj => obj.threadId === id)
         .filter(obj => obj.isRead === false).length

@@ -32,6 +32,9 @@ wss.on('connection', (ws) => {
   setTimeout(() => {
     sendWsMsg('receiveMessage', require('./receiveMessage')[2])
   }, 7000)
+  setTimeout(() => {
+    sendWsMsg('receiveMessage', require('./receiveMessage')[3])
+  }, 9000)
 
   ws.on('message', (message) => {
     setTimeout(() => {
@@ -45,6 +48,8 @@ wss.on('connection', (ws) => {
         case 'sendMessage':
           // 客户端发送message到服务端
           return sendWsMsg('sendMessage', sendMessageData(json.data))
+        case 'updateMessageReadToServer':
+          return console.log('访问数据库修改这些message为已读', json.data)
         default:
           console.log('服务端：没有找到此消息对应的rpcId')
       }

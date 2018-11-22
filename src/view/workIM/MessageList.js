@@ -17,11 +17,36 @@ export default class MessageList extends Component {
   // 首次加载这个组件的时候触发
   componentDidMount () {
     this.scrollToBottom()
+    this.updateMessageReadToStore()
   }
 
-  // 切换chatter或者添加消息等改变messageList的行为触发这个方法
+  // 切换chatter或者添加消息都会改变currentMessages，触发这个方法
+  // todo优化 currentMessages是computed的，所以messages currentChatter的变化都会触发这个方法
+  // 而非当前用户的message变化的时候currentMessages其实是没有变化的 并不需要重新computed，但是重新computed了
+  // 然后也触发了重新render
   componentWillUpdate () {
     this.scrollToBottom()
+    this.updateMessageReadToStore()
+  }
+
+  // 更新currentMessages的store message isRead
+  updateMessageReadToStore () {
+    let unReadMsgIds = []
+    this.props.workIMStore.currentMessages.forEach(obj => {
+      if (!obj.isRead) {
+        obj.isRead = true
+        unReadMsgIds.push(obj.id)
+      }
+    })
+    this.updateMessageReadToServer(unReadMsgIds)
+  }
+
+  // 更新currentMessages的服务器 message isRead
+  updateMessageReadToServer (ids) {
+    if (ids.length) {
+      // console.log(ids, '发到后台修改为已读')
+      sendWs('updateMessageReadToServer', ids)
+    }
   }
 
   // messageList滚动到最底部

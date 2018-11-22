@@ -24,7 +24,8 @@ export default class workIM extends Component {
     })
     // 接收服务端推送过来的消息
     recevieWs('receiveMessage', (data) => {
-      this.props.workIMStore.addMessagesAndUsers(data)
+      const { workIMStore } = this.props
+      workIMStore.addMessagesAndUsers(data)
     })
   }
 
