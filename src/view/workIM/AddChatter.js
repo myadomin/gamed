@@ -86,8 +86,7 @@ export default class AddChatter extends Component {
       // todo 用户id是否是唯一？ 会不会出现服务器1及服务器2都有userId是1
       workIMStore.setCurrentChatter(userIdNumber)
       sendWs('sendMessage', data, (data) => {
-        // 发送后台 修改了message的id timestamp status ，通过localId找到store里的这条消息修改它
-        // 根据status 可能成功失败等 无论成功失败不做回撤处理
+        // 存入后台后 发送消息(成功) 修改了message的id timestamp status ，通过localId找到store里的这条消息修改它
         workIMStore.updateMessagesAndUsers(data.message.localId, data)
       })
     }

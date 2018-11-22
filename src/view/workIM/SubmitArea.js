@@ -26,9 +26,9 @@ export default class SubmitArea extends Component {
     // 如果是和已在对话列表的人发消息 本地store users里就有这个user 所以这里data不需要user
     const data = {
       message: {
-        // 先id设为只一个唯一数用于messageList渲染 之后后台会返回真正的id
+        // 先把id设为一个唯一数用于messageList渲染 之后后台会返回真正的id
         id: localId,
-        // localId后台成功返回此条message后 再通过localId修改此条messsage
+        // 后台成功返回此条message后 再通过localId修改此条messsage
         localId: localId,
         threadId: workIMStore.currentChatter,
         senderId: workIMStore.currentUser,
@@ -64,7 +64,7 @@ export default class SubmitArea extends Component {
   }
 
   // 发货
-  sendDeliverMsg () {
+  sendDeliverMessage () {
     const { workIMStore } = this.props
     const localId = new Date().getTime()
     if (!workIMStore.deliverMoney) {
@@ -157,7 +157,7 @@ export default class SubmitArea extends Component {
                 </Row>
               </Form>
               <div>
-                <Button type="primary" style={{ float: 'right' }} onClick={this.sendDeliverMsg.bind(this)}>发货</Button>
+                <Button type="primary" style={{ float: 'right' }} onClick={this.sendDeliverMessage.bind(this)}>发货</Button>
               </div>
             </Tabs.TabPane>
           </Tabs>

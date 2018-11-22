@@ -34,7 +34,10 @@ wss.on('connection', (ws) => {
   }, 7000)
   setTimeout(() => {
     sendWsMsg('receiveMessage', require('./receiveMessage')[3])
-  }, 9000)
+  }, 11000)
+  setTimeout(() => {
+    sendWsMsg('receiveMessage', require('./receiveMessage')[4])
+  }, 19000)
 
   ws.on('message', (message) => {
     setTimeout(() => {

@@ -8,8 +8,8 @@ const receiveMessage = [
       senderId: 3,
       receiverId: 2,
       status: 2,
-      type: 1,
       isRead: false,
+      type: 1,
       textMsg: '玩家-id-3发给我的文本1',
       timestamp: 1537280417091
     },
@@ -31,8 +31,8 @@ const receiveMessage = [
       senderId: 4,
       receiverId: 2,
       status: 2,
-      type: 1,
       isRead: false,
+      type: 1,
       textMsg: '玩家-id-4发给我的文本1',
       timestamp: 1537280417091
     },
@@ -54,8 +54,8 @@ const receiveMessage = [
       senderId: 4,
       receiverId: 2,
       status: 2,
-      type: 1,
       isRead: false,
+      type: 1,
       textMsg: '玩家-id-4发给我的文本2',
       timestamp: 1537280417091
     },
@@ -77,8 +77,8 @@ const receiveMessage = [
       senderId: 3,
       receiverId: 2,
       status: 2,
-      type: 1,
       isRead: false,
+      type: 1,
       textMsg: '玩家-id-3发给我的文本2',
       timestamp: 1537280417091
     },
@@ -88,6 +88,32 @@ const receiveMessage = [
         avatar: 1,
         serverName: '游戏服王霸天下',
         charName: '玩家-id-3'
+      }
+    }
+  },
+  {
+    // 1->2（当前用户运营）
+    message: {
+      id: 117,
+      localId: '某个唯一值',
+      threadId: 1,
+      senderId: 1,
+      receiverId: 2,
+      status: 2,
+      isRead: false,
+      type: 4,
+      suppleMsg: {
+        type: 'money', // 'money'
+        count: 220000 // 单位是厘，显示为元除以1000
+      },
+      timestamp: 1537280417091
+    },
+    user: {
+      1: {
+        id: 1,
+        avatar: 1,
+        serverName: '游戏服王霸天下1',
+        charName: '老子是管理员'
       }
     }
   }

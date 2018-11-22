@@ -2,7 +2,7 @@ const messages = [
   {
     id: 11,
     // 用于本地添加一条消息后 发给后台 后台生产消息后通过这个localId告诉我给这条消息加一个id
-    localId: '某个唯一值',
+    localId: 11,
     // 某组对话
     // threadId永远是对方，如果senderId = threadId，说明senderId是对方 receiverId是当前用户
     // 例如 这条消息中senderId是对方 receiverId是当前用户 所以消息排列在左边
@@ -38,7 +38,7 @@ const messages = [
   },
   {
     id: 12,
-    localId: '某个唯一值',
+    localId: 12,
     threadId: 3,
     senderId: 2,
     receiverId: 3,
@@ -51,7 +51,7 @@ const messages = [
   },
   {
     id: 13,
-    localId: '某个唯一值',
+    localId: 13,
     threadId: 3,
     senderId: 3,
     receiverId: 2,
@@ -64,11 +64,11 @@ const messages = [
   },
   {
     id: 14,
-    localId: '某个唯一值',
+    localId: 14,
     threadId: 3,
     senderId: 2,
     receiverId: 3,
-    status: 2,
+    status: 3,
     // 这条文本消息中senderId是当前用户 receiverId是对方 所以消息排列在右边
     type: 1,
     isRead: false,
@@ -77,7 +77,7 @@ const messages = [
   },
   {
     id: 21,
-    localId: '某个唯一值',
+    localId: 21,
     threadId: 3,
     senderId: 2,
     receiverId: 3,
@@ -93,7 +93,7 @@ const messages = [
   },
   {
     id: 31,
-    localId: '某个唯一值',
+    localId: 31,
     threadId: 3,
     senderId: 3,
     receiverId: 2,
@@ -110,7 +110,7 @@ const messages = [
   },
   // {
   //   id: 41,
-  //   localId: '某个唯一值',
+  //   localId: 41,
   //   threadId: 2,
   //   senderId: 1,
   //   receiverId: 2,
@@ -128,7 +128,7 @@ const messages = [
   // },
   {
     id: 42,
-    localId: '某个唯一值',
+    localId: 42,
     threadId: 1,
     senderId: 1,
     receiverId: 2,
@@ -145,7 +145,7 @@ const messages = [
   }
   // {
   //   id: 91,
-  //   localId: '某个唯一值',
+  //   localId: 91,
   //   threadId: 3,
   //   senderId: 2,
   //   receiverId: 3,
