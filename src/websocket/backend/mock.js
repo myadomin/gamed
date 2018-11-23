@@ -6,6 +6,7 @@ const sendWsMsg = (rpcId, data) => {
   }
 }
 
+// 后台接收消息后 处理消息
 const sendMessageData = (data) => {
   // 补全id timestamp
   const now = new Date().getTime()
@@ -16,6 +17,21 @@ const sendMessageData = (data) => {
   // 存储超时，返回发送状态失败
   data.message.status = 3
   return data
+}
+
+// 后台接收登录后{userName: 'xxxx', password: 'xxx'} 处理登录 形成token返回给前端
+const login = (data) => {
+  const crypto = require('crypto')
+  let nameAndPass = ''
+  for (var i in data) {
+    nameAndPass += data[i]
+  }
+  // todo userName和password经过处理加密成token, 最终能通过token解密出userName password
+  const token = crypto.createHash('md5').update(nameAndPass, 'utf-8').digest('hex')
+  return {
+    token: token,
+    userId: 2
+  }
 }
 
 // 接收到websocket客户端的消息 根据rpcId返回相应数据
@@ -53,6 +69,9 @@ wss.on('connection', (ws) => {
           return sendWsMsg('sendMessage', sendMessageData(json.data))
         case 'updateMessageReadToServer':
           return console.log('访问数据库修改这些message为已读', json.data)
+        case 'login':
+          // 登录处理
+          return sendWsMsg('login', login(json.data))
         default:
           console.log('服务端：没有找到此消息对应的rpcId')
       }
