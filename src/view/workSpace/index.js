@@ -26,7 +26,8 @@ class App extends Component {
     // 每次刷新 切换导航 重新输入url等都会进入这里 重新算出current给到selectedKeys
     // this.props.history.push(a) 动态跳转
     const { match, location } = this.props
-    const current = location.pathname.replace(/\/app/, '').replace(/\//, '') || 'workIM'
+    const reg = new RegExp(match.path)
+    const current = location.pathname.replace(reg, '').replace(/\//, '') || 'workIM'
     console.log(current)
     return (
       <Layout style={{ height: '100vh' }}>

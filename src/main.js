@@ -2,7 +2,7 @@
 import 'babel-polyfill'
 import React from 'react'
 import ReactDOM from 'react-dom'
-import App from '@/view/app'
+import App from '@/app'
 import '@/style/base.styl'
 import { Provider } from 'mobx-react'
 import workIMStore from '@/stores/workIMStore.js'
