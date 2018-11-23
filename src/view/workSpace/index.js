@@ -29,7 +29,7 @@ class App extends Component {
     const { match, location } = this.props
     const reg = new RegExp(match.path)
     const current = location.pathname.replace(reg, '').replace(/\//, '') || 'workIM'
-    // console.log(current)
+    console.log(current)
     return (
       <Layout style={{ height: '100vh' }}>
         <DevTools />
@@ -47,13 +47,13 @@ class App extends Component {
             selectedKeys={[current]}
           >
             <Menu.Item key="workIM">
-              <Link to={`${match.path}/workIM`} replace>
+              <Link to="/workIM" replace>
                 <Icon type="desktop"/>
                 <span className="nav-text">工作台</span>
               </Link>
             </Menu.Item>
             <Menu.Item key="bill">
-              <Link to={`${match.path}/bill`} replace>
+              <Link to="/bill" replace>
                 <Icon type="file" />
                 <span className="nav-text">账单</span>
               </Link>
@@ -64,9 +64,9 @@ class App extends Component {
           <MyHeader />
           <Content style={{ margin: (current === 'workIM' ? '0' : '24px 16px 0') }}>
             <div style={{ padding: (current === 'workIM' ? 0 : 24), background: '#fff' }}>
-              <Route exact path={match.path} component={WorkIM} />
-              <Route path={`${match.path}/workIM`} component={WorkIM} />
-              <Route path={`${match.path}/bill`} component={Bill} />
+              <Route exact path="/" component={WorkIM} />
+              <Route path="/workIM" component={WorkIM} />
+              <Route path="/bill" component={Bill} />
             </div>
           </Content>
           <MyFooter />
