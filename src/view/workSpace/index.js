@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import { Layout, Menu, Icon } from 'antd'
-import { Route, Link, withRouter } from 'react-router-dom'
+import { Route, Link, withRouter, Redirect } from 'react-router-dom'
 import './index.styl'
 import MyHeader from '@/view/workSpace/MyHeader'
 import MyFooter from '@/view/workSpace/MyFooter'
@@ -8,6 +8,7 @@ import WorkIM from '@/view/workIM'
 import Bill from '@/view/bill'
 import { inject, observer } from 'mobx-react'
 import DevTools from 'mobx-react-devtools'
+import { getStorageItem } from '@/utils'
 
 @inject('workIMStore')
 @observer
@@ -20,16 +21,18 @@ class App extends Component {
   }
 
   render () {
-    const { Header, Content, Footer, Sider } = Layout
+    if (!getStorageItem('dToken')) {
+      // 动态跳转 this.props.history.push(a)  用replace开发环境没有warning 如果在render里官方推荐Redirect
+      return <Redirect replace to="/login" />
+    }
+    const { Content, Sider } = Layout
     // img src 图片都用require, npm build才能正确打包图片
     const imgUrl = require('@/assets/logo.svg')
-    // withRouter(App)以后 this.props就有location等路由相关信息了
-    // 每次刷新 切换导航 重新输入url等都会进入这里 重新算出current给到selectedKeys
-    // this.props.history.push(a) 动态跳转
+    // withRouter(App)以后 this.props就有location等路由相关信息了 好像不需要withRouter也可以？
     const { match, location } = this.props
     const reg = new RegExp(match.path)
     const current = location.pathname.replace(reg, '').replace(/\//, '') || 'workIM'
-    console.log(current)
+    // console.log(current)
     return (
       <Layout style={{ height: '100vh' }}>
         <DevTools />
@@ -47,13 +50,13 @@ class App extends Component {
             selectedKeys={[current]}
           >
             <Menu.Item key="workIM">
-              <Link to="/workIM" replace>
+              <Link to={match.path + '/workIM'} replace>
                 <Icon type="desktop"/>
                 <span className="nav-text">工作台</span>
               </Link>
             </Menu.Item>
             <Menu.Item key="bill">
-              <Link to="/bill" replace>
+              <Link to={match.path + '/bill'} replace>
                 <Icon type="file" />
                 <span className="nav-text">账单</span>
               </Link>
@@ -64,9 +67,9 @@ class App extends Component {
           <MyHeader />
           <Content style={{ margin: (current === 'workIM' ? '0' : '24px 16px 0') }}>
             <div style={{ padding: (current === 'workIM' ? 0 : 24), background: '#fff' }}>
-              <Route exact path="/" component={WorkIM} />
-              <Route path="/workIM" component={WorkIM} />
-              <Route path="/bill" component={Bill} />
+              <Route path= {match.path + '/'} component={WorkIM} />
+              <Route path= {match.path + '/workIM'} component={WorkIM} />
+              <Route path= {match.path + '/bill'} component={Bill} />
             </div>
           </Content>
           <MyFooter />
@@ -76,4 +79,4 @@ class App extends Component {
   }
 }
 
-export default withRouter(App)
+export default App

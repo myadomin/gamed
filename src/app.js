@@ -19,7 +19,7 @@ class App extends Component {
       <HashRouter>
         <div>
           <Route path="/login" component={Login} />
-          <Route path="/" component={WorkSpace} />
+          <Route path="/workSpace" component={WorkSpace} />
         </div>
       </HashRouter>
     )

@@ -1,7 +1,9 @@
 import React, { Component } from 'react'
 import MyFooter from '@/view/workSpace/MyFooter'
-import { Layout, Form, Icon, Input, Button, Checkbox } from 'antd'
-import { sendWs } from '@/websocket/index'
+import { Layout, Form, Icon, Input, Button } from 'antd'
+import { sendWs } from '@/websocket'
+import { Redirect } from 'react-router-dom'
+import { setStorageItem, getStorageItem } from '@/utils'
 
 class Login extends Component {
   constructor (props, context) {
@@ -15,13 +17,17 @@ class Login extends Component {
     this.props.form.validateFields((err, values) => {
       if (!err) {
         sendWs('login', values, (data) => {
-          console.log(1111, data)
+          setStorageItem('dToken', data)
+          this.props.history.replace('/workSpace')
         })
       }
     })
   }
 
   render () {
+    if (getStorageItem('dToken')) {
+      return <Redirect replace to="/workSpace" />
+    }
     const { Header, Content } = Layout
     const FormItem = Form.Item
     const { getFieldDecorator } = this.props.form
