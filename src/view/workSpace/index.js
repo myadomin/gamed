@@ -2,7 +2,8 @@ import React, { Component } from 'react'
 import { Layout, Menu, Icon } from 'antd'
 import { Route, Link, withRouter } from 'react-router-dom'
 import './index.styl'
-import GlobalHeader from './GlobalHeader'
+import MyHeader from '@/view/workSpace/MyHeader'
+import MyFooter from '@/view/workSpace/MyFooter'
 import WorkIM from '@/view/workIM'
 import Bill from '@/view/bill'
 import { inject, observer } from 'mobx-react'
@@ -28,7 +29,7 @@ class App extends Component {
     const { match, location } = this.props
     const reg = new RegExp(match.path)
     const current = location.pathname.replace(reg, '').replace(/\//, '') || 'workIM'
-    console.log(current)
+    // console.log(current)
     return (
       <Layout style={{ height: '100vh' }}>
         <DevTools />
@@ -60,9 +61,7 @@ class App extends Component {
           </Menu>
         </Sider>
         <Layout>
-          <Header style={{ background: '#fff', padding: 0 }}>
-            <GlobalHeader />
-          </Header>
+          <MyHeader />
           <Content style={{ margin: (current === 'workIM' ? '0' : '24px 16px 0') }}>
             <div style={{ padding: (current === 'workIM' ? 0 : 24), background: '#fff' }}>
               <Route exact path={match.path} component={WorkIM} />
@@ -70,9 +69,7 @@ class App extends Component {
               <Route path={`${match.path}/bill`} component={Bill} />
             </div>
           </Content>
-          <Footer style={{ textAlign: 'center' }}>
-              xxxx ©2018 Created by xxxxx
-          </Footer>
+          <MyFooter />
         </Layout>
       </Layout>
     )

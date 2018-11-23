@@ -1,4 +1,6 @@
 import React, { Component } from 'react'
+import { Layout } from 'antd'
+import MyFooter from '@/view/workSpace/MyFooter'
 
 export default class Bill extends Component {
   constructor (props, context) {
@@ -8,8 +10,12 @@ export default class Bill extends Component {
   }
 
   render () {
+    const { Content } = Layout
     return (
-      <div>login</div>
+      <Layout style={{ height: '100vh' }} id="login">
+        <Content>Content</Content>
+        <MyFooter />
+      </Layout>
     )
   }
 }
