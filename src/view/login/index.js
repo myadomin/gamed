@@ -10,6 +10,7 @@ class Login extends Component {
     super(props)
     this.state = {
     }
+    console.log(1)
   }
 
   handleSubmit = (e) => {
@@ -18,15 +19,16 @@ class Login extends Component {
       if (!err) {
         sendWs('login', values, (data) => {
           setStorageItem('dToken', data)
-          this.props.history.replace('/workSpace')
+          this.props.history.replace('/')
         })
       }
     })
   }
 
   render () {
+    console.log('login')
     if (getStorageItem('dToken')) {
-      return <Redirect replace to="/workSpace" />
+      return <Redirect replace to="/" />
     }
     const { Header, Content } = Layout
     const FormItem = Form.Item
