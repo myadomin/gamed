@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { Avatar, Icon, Tooltip } from 'antd'
+import { Avatar, Icon, Tooltip, Popover } from 'antd'
 import './index.styl'
 import dayjs from 'dayjs'
 import { inject, observer } from 'mobx-react'
@@ -11,6 +11,7 @@ export default class MessageList extends Component {
   constructor (props, context) {
     super(props)
     this.state = {
+      visibleId: ''
     }
   }
 
@@ -134,6 +135,8 @@ export default class MessageList extends Component {
 
     const showStatus = (item) => {
       const { status } = item
+      // todo 发货及补货操作才有余额不足？是否应该发货后先显示发货消息 然后后台返回余额不足 然后撤回这条消息？
+      // 玩家不在线 为什么有这个？ 不在线消息为什么不能直接给他
       if (status === 1) {
         // 发送中
         return <Icon className="loading" type="loading-3-quarters" spin />
@@ -167,6 +170,23 @@ export default class MessageList extends Component {
       })
     }
 
+    // 撤回消息
+    const withdrawMessage = (id) => {
+      console.log('撤回id是' + id + '的消息')
+    }
+    const messageOperation = (id) => {
+      return (
+        <ul className="message-operation">
+          <li onClick={() => withdrawMessage(id)}>撤回</li>
+          {/* <li>删除</li> */}
+          {/* <li>预留</li> */}
+        </ul>
+      )
+    }
+    const handleVisibleChange = (id) => {
+      this.state.visibleId === id ? this.setState({ visibleId: '' }) : this.setState({ visibleId: id })
+    }
+
     return (
       <ul style={{ padding: '15px 20px' }}>
         {workIMStore.currentMessages.map(item => {
@@ -174,7 +194,14 @@ export default class MessageList extends Component {
           return <li key={item.id}>
             <div className={isLeft ? 'leftAlign' : 'rightAlign'}>
               <Avatar shape="square" size={32} src={imgUrl} />
-              {getMessageItem(item, isLeft)}
+              <Popover
+                content={messageOperation(item.id)}
+                trigger="click"
+                visible={this.state.visibleId === item.id}
+                onVisibleChange={() => handleVisibleChange(item.id)}
+              >
+                {getMessageItem(item, isLeft)}
+              </Popover>
               <div style={{ margin: '5px' }}>{showStatus(item)}</div>
             </div>
           </li>
