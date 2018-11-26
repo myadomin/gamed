@@ -6,6 +6,12 @@ const sendWsMsg = (rpcId, data) => {
   }
 }
 
+// 进入页面 根据userId拿初始消息
+const getMessagesAndUsersAndServerList = (data) => {
+  console.log('开始拿取userId是' + data + '的初始消息')
+  return require('./messagesAndUsersAndServerList')
+}
+
 // 后台接收消息后 处理消息
 const sendMessageData = (data) => {
   // 补全id timestamp
@@ -35,6 +41,7 @@ const login = (data) => {
   }
 }
 
+// 登出
 const logout = (data) => {
   return 'userId=' + data + '的logout后台已处理了'
 }
@@ -68,7 +75,7 @@ wss.on('connection', (ws) => {
           return sendWsMsg('heartbeat', 'heartbeat: WebSocket is connectted')
         case 'getMessagesAndUsersAndServerList':
           // 刷新进入页面加载所有message
-          return sendWsMsg('getMessagesAndUsersAndServerList', require('./messagesAndUsersAndServerList'))
+          return sendWsMsg('getMessagesAndUsersAndServerList', getMessagesAndUsersAndServerList(json.data))
         case 'sendMessage':
           // 客户端发送message到服务端
           return sendWsMsg('sendMessage', sendMessageData(json.data))
