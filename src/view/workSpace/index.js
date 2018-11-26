@@ -12,7 +12,7 @@ import { getStorageItem } from '@/utils'
 
 @inject('workIMStore')
 @observer
-class App extends Component {
+class WorkSpace extends Component {
   constructor (props, context) {
     super(props)
     this.state = {
@@ -21,7 +21,6 @@ class App extends Component {
   }
 
   render () {
-    console.log('work')
     if (!getStorageItem('dToken')) {
       // 动态跳转 this.props.history.push(a)  用replace开发环境没有warning 如果在render里官方推荐Redirect
       return <Redirect replace to="/login" />
@@ -33,7 +32,7 @@ class App extends Component {
     const { match, location } = this.props
     const reg = new RegExp(match.path)
     const current = location.pathname.replace(reg, '').replace(/\//, '') || 'workIM'
-    console.log(current, match.path)
+    // console.log(current, match.path)
     return (
       <Layout style={{ height: '100vh' }}>
         <DevTools />
@@ -84,4 +83,4 @@ class App extends Component {
   }
 }
 
-export default App
+export default WorkSpace

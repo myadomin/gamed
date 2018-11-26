@@ -1,8 +1,9 @@
 import { observable, action, computed, autorun } from 'mobx'
+import { getStorageItem } from '@/utils'
 
 export class WorkIMStore {
   // 当前用户 todo:登录后存入localstorage然后拿 现在假设是2 运营
-  @observable currentUser = 2
+  @observable currentUser = getStorageItem('dToken').userId
   // 抽屉是否打开
   @observable isShowDrawer = false
   // 所有消息

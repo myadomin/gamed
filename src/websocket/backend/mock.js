@@ -30,8 +30,13 @@ const login = (data) => {
   const token = crypto.createHash('md5').update(nameAndPass, 'utf-8').digest('hex')
   return {
     token: token,
-    userId: 2
+    userId: 2,
+    userName: '老子是运营'
   }
+}
+
+const logout = (data) => {
+  return 'userId=' + data + '的logout后台已处理了'
 }
 
 // 接收到websocket客户端的消息 根据rpcId返回相应数据
@@ -72,6 +77,9 @@ wss.on('connection', (ws) => {
         case 'login':
           // 登录处理
           return sendWsMsg('login', login(json.data))
+        case 'logout':
+          // 登录退出
+          return sendWsMsg('logout', logout(json.data))
         default:
           console.log('服务端：没有找到此消息对应的rpcId')
       }

@@ -10,7 +10,6 @@ class Login extends Component {
     super(props)
     this.state = {
     }
-    console.log(1)
   }
 
   handleSubmit = (e) => {
@@ -26,7 +25,6 @@ class Login extends Component {
   }
 
   render () {
-    console.log('login')
     if (getStorageItem('dToken')) {
       return <Redirect replace to="/" />
     }
